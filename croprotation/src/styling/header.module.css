@@ -3,6 +3,76 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 15vh;
-    background: #8B5A2B;
+    min-height: 10vh;
+    background-image: url("../assets/soil.avif");
+    display: flex; 
+}
+
+.logo {
+    height: clamp(0.5rem, 8vh, 8rem);
+    max-height: 100%;
+    width:  clamp(0.5rem, 8vh, 8rem);
+}
+
+h1 {
+    font-size: clamp(0.5rem, 3.7vw, 4rem);
+    color: white;
+    text-shadow:
+    -3px -3px 0 black,  
+     3px -3px 0 black,
+    -3px  3px 0 black,
+     3px  3px 0 black;
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out;
+    color: white;
+    font-size: clamp(0.3rem, 2vw, 1.8rem);
+    max-height: 100%;
+    text-shadow:
+    -3px -3px 0 black,  
+     3px -3px 0 black,
+    -3px  3px 0 black,
+     3px  3px 0 black;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.leftSection{
+    display: flex;
+    width: 70vw;
+    align-items: center;
+}
+
+.rigthSection{
+    display: flex;
+    justify-content: flex-end;
+    width: 30vw;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    button {
+        padding: 0.8vh 3vw; /* Λίγο μεγαλύτερο padding σε μικρές οθόνες */
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        width: 100%; /* Κουμπιά πλήρους πλάτους σε πολύ μικρές οθόνες */
+        text-align: center;
+    }
 }
