@@ -1,13 +1,21 @@
 import React from "react";
 import Header from "./header";
+import { Outlet } from "react-router-dom";
+import style from "../styling/layout.module.css"
 
 
-const Layout = () =>{
+const Layout = () => {
     return (
-        <Header/>
-        
+        <>
+            <Header />
+            <div className={style.content}>
+                <main>
+                    <Outlet />
+                </main>
+            </div>
+        </>
     );
-    
+
 }
 
 export default Layout;
