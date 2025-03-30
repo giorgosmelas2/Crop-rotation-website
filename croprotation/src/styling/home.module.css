@@ -7,11 +7,17 @@
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    justify-content: center;
     align-items: center;
+    box-shadow: 10px 40px 60px 20px rgba(34, 62, 49, 0.3);
 }
 
-.greenLine {
+.hero_motion {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.green_line {
     width: 30vw;
     height: 1vh;
     background-color: #233f36;
@@ -26,4 +32,34 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 15vh;
+    margin-top: 3vh;
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizontally_container {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.color_box {
+    background-color: rgba(245, 222, 200, 0.65);
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.green_box {
+    width: 18em;
+    height: 25em;
+    background-color: #233f36;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

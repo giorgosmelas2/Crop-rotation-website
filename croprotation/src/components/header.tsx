@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import style from "../styling/header.module.css";
+import { Text } from "./Text";
 
 const Header = () => {
   return (
     <header className={style.header}>
       <div className={style.leftSection}>
         <img className={style.logo} src="/crop-rotation-color-icon-ok.png" alt="Crop Rotation Logo" />
-        <h1>Crop Rotation</h1>
+        <Text
+          variant="header_title"
+          as="h1">
+          Crop Rotation
+        </Text>
       </div>
 
       <div className={style.rigthSection}>

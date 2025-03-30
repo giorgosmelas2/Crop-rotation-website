@@ -14,15 +14,8 @@
     width: clamp(2rem, 8vh, 8rem);
 }
 
-h1 {
-    font-size: clamp(0.5rem, 3.7vw, 3.8rem);
-    color: white;
-    cursor: pointer;
-}
-
 button {
     font-family: 'Playfair Display', serif;
-
     border: none;
     background-color: transparent;
     transition: background-color 0.3s ease-in-out;

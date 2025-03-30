@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header";
+import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import style from "../styling/layout.module.css"
 
