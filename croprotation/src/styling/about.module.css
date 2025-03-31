@@ -1,0 +1,17 @@
+.green_starting_background {
+    height: 90vh;
+    width: 100%;
+    margin-top: 10vh;
+    background-image: repeating-linear-gradient(to right,
+            #375240 0px,
+            #375240 1px,
+            #365240 1px,
+            #365240 2px,
+            #365341 2px,
+            #365341 6px,
+            #f9f9f9 5px,
+            #f9f9f9 6px
+            );
+
+
+}

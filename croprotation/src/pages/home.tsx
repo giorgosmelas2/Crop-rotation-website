@@ -9,15 +9,15 @@ const Home = () => {
     return (
         <div>
             <motion.section
-                className={style.hero}
+                className={style.photo}
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 7, ease: "easeOut" }}>
+                transition={{ duration: 6, ease: "easeOut" }}>
                 <motion.div
-                    className={style.hero_motion}
+                    className={style.photo_motion}
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}>
+                    transition={{ duration: 0.7, ease: "easeOut" }}>
                     <div className={style.vertical_container}>
                         <Text
                             variant="main_title"
@@ -64,7 +64,7 @@ const Home = () => {
                             <Text
                                 variant="box_title"
                                 as="h4">
-                                Climat
+                                Climate
                             </Text>
                             <img src={climateImage} alt="soilImg" />
                             <Text

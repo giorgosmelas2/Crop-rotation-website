@@ -42,8 +42,6 @@ const fontSizes = {
 
 export const Text = ({
     variant = 'main_text',
-    color = 'main_text',
-    fontSize = "1em",
     children,
     as: Component = 'p',
 }: Props) => {
