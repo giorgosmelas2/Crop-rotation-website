@@ -3,7 +3,7 @@ import clsx from "clsx"
 
 type Props = {
     variant?: 'header_title' | 'button_text' | 'main_title' | 'secondary_title' | 'main_text' | 'box_title' | 'box_text';
-    color?: 'header_title' | 'button_text' | 'main_title' | 'secondary_title' | 'main_text' | 'box_title' | 'box_text' ;
+    color?: 'white' | 'black' | 'green';
     fontSize?: string;
     children: React.ReactNode;
     as?: React.ElementType;
@@ -21,13 +21,9 @@ const fontFamilies  = {
 };
 
 const colors  = {
-    header_title: '#ffffff',
-    button_text: '#ffffff',
-    main_title: '#233f36',
-    secondary_title: '#ffffff',
-    main_text: '#000000',
-    box_title: '#ffffff',
-    box_text: '#ffffff',
+    white: '#ffffff',
+    black: '#000000',
+    green: '#3b4d35',
 };
 
 const fontSizes = {
@@ -42,6 +38,7 @@ const fontSizes = {
 
 export const Text = ({
     variant = 'main_text',
+    color = 'white',
     children,
     as: Component = 'p',
 }: Props) => {
@@ -50,7 +47,7 @@ export const Text = ({
             style={{
                 cursor: Component === "h1" ? "pointer" : undefined,
                 fontFamily: fontFamilies[variant],
-                color: colors[variant],
+                color: colors[color],
                 fontSize: fontSizes[variant],
             }}>
             {children}

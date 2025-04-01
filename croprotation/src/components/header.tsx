@@ -11,6 +11,7 @@ const Header = () => {
         <Link to="/">
           <Text
             variant="header_title"
+            color="white"
             as="h1">
             Crop Rotation
           </Text>

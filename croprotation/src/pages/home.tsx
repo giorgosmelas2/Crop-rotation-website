@@ -7,7 +7,7 @@ import { Text } from "../components/Text";
 
 const Home = () => {
     return (
-        <div>
+        <>
             <motion.section
                 className={style.photo}
                 initial={{ scale: 1.1 }}
@@ -21,13 +21,14 @@ const Home = () => {
                     <div className={style.vertical_container}>
                         <Text
                             variant="main_title"
+                            color="green"
                             as="h2">
                             Wellcome to AI-Powered Crop Rotation Advisor
                         </Text>
                         <div className={style.green_line}></div>
                         <Text
                             variant="secondary_title"
-                            color="secondary_title"
+                            color="white"
                             as="h3">
                             Let nature and AI grow your future
                         </Text>
@@ -38,6 +39,7 @@ const Home = () => {
                 <div className={style.vertical_container}>
                     <Text
                         variant="main_text"
+                        color="black"
                         as="h4">
                         This AI-driven crop rotation recommendation system,
                         designed to help farmers optimize their planting strategies
@@ -50,12 +52,14 @@ const Home = () => {
                         <div className={style.green_box}>
                             <Text
                                 variant="box_title"
+                                color="white"
                                 as="h4">
                                 Soil
                             </Text>
                             <img src={soilImage} alt="soilImg" />
                             <Text
                                 variant="box_text"
+                                color="white"
                                 as="p">
                                 Preserve soil health with scientifically optimized crop rotations.
                             </Text>
@@ -63,12 +67,14 @@ const Home = () => {
                         <div className={style.green_box}>
                             <Text
                                 variant="box_title"
+                                color="white"
                                 as="h4">
                                 Climate
                             </Text>
                             <img src={climateImage} alt="soilImg" />
                             <Text
                                 variant="box_text"
+                                color="white"
                                 as="p">
                                 Adapt to changing climate conditions for better resilience.
                                 Align your crops with market demand to boost profitability.
@@ -77,7 +83,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 
