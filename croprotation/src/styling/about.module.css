@@ -1,7 +1,7 @@
 .photo {
     width: 100%;
     height: 25vh;
-    background-image: url("../assets/fields2.png");
+    background-image: url("../assets/fields.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,5 +15,30 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #3b4d35; 
+    justify-content: center;
+    background-color: #3b4d35;
+    background-image: repeating-linear-gradient(to right,
+            #3b4d35 0px,
+            #32442e 1px,
+            #3b4d35 1px,
+            #3b4d35 10px);
+            box-shadow: 10px 40px 60px 20px rgba(34, 62, 49, 0.3);
+}
+
+.info_text {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.info_container {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.info_box {
+    width: 15vw;
+    height: 20vh;
 }

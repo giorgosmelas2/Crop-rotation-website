@@ -27,7 +27,7 @@ const Home = () => {
                         </Text>
                         <div className={style.green_line}></div>
                         <Text
-                            variant="secondary_title"
+                            variant="calligraphic_title"
                             color="white"
                             as="h3">
                             Let nature and AI grow your future
