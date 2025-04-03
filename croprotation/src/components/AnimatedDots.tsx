@@ -1,19 +1,27 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react";
 
 const AnimatedDots = () => {
-    const [dots, setDots] = useState("");
+  const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        let count = 0;
-        const interval = setInterval(() => {
-            count = (count + 1) % 4;
-            setDots(".".repeat(count));
-        }, 500);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prev) => {
+        if (prev === 3) {
+          clearInterval(interval); 
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 500);
 
-        return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval); 
+  }, []);
 
-    return<span>{dots}</span>;
-}
+  return (
+    <span style={{ display: "inline-block", width: "2ch", textAlign: "left" }}>
+      {["", ".", "..", "..."][count]}
+    </span>
+  );
+};
 
 export default AnimatedDots;
