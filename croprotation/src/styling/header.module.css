@@ -43,7 +43,7 @@ button:focus {
     align-items: center;
 }
 
-.rigthSection{
+.rightSection{
     display: flex;
     justify-content: flex-end;
     width: 30%;

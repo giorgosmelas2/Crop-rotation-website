@@ -18,7 +18,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className={style.rigthSection}>
+      <div className={style.rightSection}>
       <button>Overview</button>
         <Link to="about">
           <button>About me</button>
