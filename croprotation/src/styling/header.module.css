@@ -7,6 +7,9 @@
     z-index: 9999; 
     background-color: #3b4d35;
     display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
 }
 
 .logo {
@@ -39,27 +42,46 @@ button:focus {
 
 .leftSection{
     display: flex;
-    width: 70%;
     align-items: center;
+    gap: 1rem;
 }
 
 .rightSection{
     display: flex;
     justify-content: flex-end;
-    width: 30%;
     white-space: nowrap;
+    gap: 1rem;
 }
 
-@media (max-width: 768px) {
-    button {
-        padding: 0.8vh 3vw; 
-        font-size: 1rem;
-    }
-}
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
 
-@media (max-width: 480px) {
-    button {
-        width: 100%; 
-        text-align: center;
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
     }
-}
+  
+    .rightSection {
+      display: none;
+      position: absolute;
+      top: 10vh;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      background-color: #3b4d35;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+  
+    .rightSection.open {
+      display: flex;
+    }
+  }
+  
