@@ -19,7 +19,10 @@ const About = () => {
             <section className={style.green_personal_info_background}>
                 <div className={style.short_info_container}>
                     <div className={style.short_info_box}>
-                        <img src={nameImage} alt="name" />
+                        <img
+                            src={nameImage}
+                            className={style.info_image}
+                            alt="name" />
                         <Text
                             variant="box_text"
                             color="white"
@@ -28,7 +31,10 @@ const About = () => {
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
-                        <img src={educationImage} alt="name" />
+                        <img
+                            src={educationImage}
+                            className={style.info_image}
+                            alt="name" />
                         <Text
                             variant="box_text"
                             color="white"
@@ -37,7 +43,10 @@ const About = () => {
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
-                        <img src={aiImage} alt="name" />
+                        <img
+                            src={aiImage}
+                            className={style.info_image}
+                            alt="name" />
                         <Text
                             variant="box_text"
                             color="white"
@@ -46,7 +55,10 @@ const About = () => {
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
-                        <img src={tractorImage} alt="name" />
+                        <img
+                            src={tractorImage}
+                            className={style.info_image}
+                            alt="name" />
                         <Text
                             variant="box_text"
                             color="white"

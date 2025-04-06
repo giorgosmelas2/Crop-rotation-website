@@ -1,6 +1,6 @@
 .photo {
     width: 100%;
-    height: 40vh;
+    min-height: 40vh;
     background-image: url("../assets/fields.png");
     background-size: cover;
     background-position: center;
@@ -11,8 +11,9 @@
 }
 
 .green_personal_info_background {
-    height: 35vh;
+    min-height: 35vh;
     width: 100%;
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,6 +26,11 @@
     box-shadow: 10px 40px 60px 20px rgba(34, 62, 49, 0.3);
 }
 
+.info_image {
+    width: clamp(100px, 5vw, 400px);
+    height: auto;
+}
+
 .info_text {
     width: 100%;
     display: flex;
@@ -33,31 +39,38 @@
 }
 
 .short_info_container {
-    width: 50%;
+    width: 60%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2em;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 1.5rem;
 }
 
 .short_info_box {
-    width: 15vw;
-    height: auto;
+    width: clamp(120px, 20vw, 200px);
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .extended_info_container {
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: justify;
-    padding: 2rem;
+
 }
 
 .extended_info_box {
     background-color: #f0e8e0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    line-height: 1.75;
+    max-width: 90ch;
+    text-align: justify;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
     padding: 1.5em;
     line-height: 1.6;

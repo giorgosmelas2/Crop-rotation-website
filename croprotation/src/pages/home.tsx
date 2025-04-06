@@ -37,10 +37,11 @@ const Home = () => {
             </motion.section>
             <section className={style.info}>
                 <div className={style.vertical_container}>
+                    <div className={style.info_text_block}>
                     <Text
                         variant="main_text"
                         color="black"
-                        as="h4">
+                        as="p">
                         This AI-driven crop rotation recommendation system,
                         designed to help farmers optimize their planting strategies
                         for healthier soil, increased yields, and greater profitability.
@@ -48,6 +49,8 @@ const Home = () => {
                         and market demand to suggest the ideal crop sequence,
                         ensuring sustainable farming practices and maximizing efficiency.
                     </Text>
+                    </div>
+                    
                     <div className={style.horizontally_container}>
                         <div className={style.green_box}>
                             <Text
@@ -56,7 +59,9 @@ const Home = () => {
                                 as="h4">
                                 Soil
                             </Text>
-                            <img src={soilImage} alt="soilImg" />
+                            <img src={soilImage}
+                                className={style.box_image}
+                                alt="soilImg" />
                             <Text
                                 variant="box_text"
                                 color="white"
@@ -71,7 +76,10 @@ const Home = () => {
                                 as="h4">
                                 Climate
                             </Text>
-                            <img src={climateImage} alt="soilImg" />
+                            <img
+                                src={climateImage}
+                                className={style.box_image}
+                                alt="soilImg" />
                             <Text
                                 variant="box_text"
                                 color="white"

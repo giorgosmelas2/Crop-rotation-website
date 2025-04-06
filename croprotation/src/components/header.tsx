@@ -29,15 +29,46 @@ const Header = () => {
       </button>
 
       <div className={`${style.rightSection} ${menuOpen ? style.open : ""}`}>
-        <button>Overview</button>
-        <Link to="about">
-          <button>About me</button>
+        <Link 
+        to="overview" 
+        className={style.menu_button}>
+          <Text
+            variant="button_text"
+            color="white"
+            as="span">
+            Overview
+          </Text>
         </Link>
-        <Link to="rotationplan">
-          <button>Rotation Plan</button>
+        <Link 
+        to="about" 
+        className={style.menu_button}>
+          <Text
+            variant="button_text"
+            color="white"
+            as="span">
+            About me
+          </Text>
         </Link>
-
-        <button> Login</button>
+        <Link 
+        to="rotationplan" 
+        className={style.menu_button}>
+          <Text
+            variant="button_text"
+            color="white"
+            as="span">
+            Rotation Plan
+          </Text>
+        </Link >
+        <Link 
+        to="login" 
+        className={style.menu_button}>
+          <Text
+            variant="button_text"
+            color="white"
+            as="span">
+            Login
+          </Text>
+        </Link>
       </div>
     </header>
   );

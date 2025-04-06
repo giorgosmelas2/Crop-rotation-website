@@ -16,6 +16,11 @@
     justify-content: center;
 }
 
+.box_image {
+    width: clamp(100px, 5vw, 400px);
+    height: auto;
+}
+
 .green_line {
     width: 30vw;
     height: 1vh;
@@ -25,8 +30,21 @@
     margin-top: 1em;
 }
 
+.info_text_block {
+    line-height: 1.75;
+    max-width: 90ch;
+    text-align: justify;
+
+
+    background-color: #f0e8e0;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    margin: 3rem auto;
+}
+
 .vertical_container {
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,16 +61,12 @@
 }
 
 .horizontally_container {
-    width: 50%;
+    width: 60%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.color_box {
-    background-color: rgba(245, 222, 200, 0.65);
-    border-radius: 8px;
-    width: fit-content;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 1.5rem;
 }
 
 .green_box {
@@ -63,4 +77,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }

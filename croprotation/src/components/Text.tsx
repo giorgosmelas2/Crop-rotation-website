@@ -29,14 +29,14 @@ const colors  = {
 };
 
 const fontSizes = {
-    header_title: 'clamp(0.5rem, 3.7vw, 3.8rem)',
-    button_text: '1em',
-    main_title: '3.5em',
-    calligraphic_title: '2.5em',
-    secondary_title: '2em',
-    main_text: '1.5em',
-    box_title: '1.5em',
-    box_text: '1.2em',
+    header_title: 'clamp(2.2rem, 4vw, 3.8rem)',
+    button_text: 'clamp(1.1rem, 2vw, 1.7rem)',
+    main_title: 'clamp(1.2rem, 6vw, 4rem)',
+    calligraphic_title: 'clamp(1.3rem, 2.6vw, 2.2rem)',
+    secondary_title: 'clamp(1.8rem, 3vw, 2.5rem)',
+    main_text: 'clamp(1rem, 3.5vw, 1.7rem)',
+    box_title: 'clamp(1.5rem, 2.5vw, 1.9rem)',
+    box_text: 'clamp(1.2rem, 2vw, 1.2rem)',
 };
 
 export const Text = ({
