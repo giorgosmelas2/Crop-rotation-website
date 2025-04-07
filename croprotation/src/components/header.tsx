@@ -7,7 +7,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className={style.header}>
-      <div className={style.leftSection}>
+      <div className={style.left_section}>
         <img
           className={style.logo}
           src="/crop-rotation-color-icon-ok.png"
@@ -28,7 +28,7 @@ const Header = () => {
         ☰
       </button>
 
-      <div className={`${style.rightSection} ${menuOpen ? style.open : ""}`}>
+      <div className={`${style.right_section} ${menuOpen ? style.open : ""}`}>
         <Link 
         to="overview" 
         className={style.menu_button}>

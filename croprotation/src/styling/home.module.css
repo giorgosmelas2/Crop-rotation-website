@@ -1,5 +1,5 @@
 .photo {
-    height: 90vh;
+    height: clamp(40rem, 90vh, 80rem) ;
     width: 100%;
     background-image: url('../assets/agriculture.png');
     background-size: cover;
