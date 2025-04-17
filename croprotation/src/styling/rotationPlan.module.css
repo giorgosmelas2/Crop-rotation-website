@@ -62,7 +62,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
@@ -72,6 +71,8 @@
     width: 80%;
     height: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     border-radius: 10px;
     padding: 1rem 1rem;
@@ -84,6 +85,23 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
+.checkBox_container {
+    width: 100%;
+    height: auto;
+
+}
+
+.spinner {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    accent-color: #3b4d35;
+}
+
+
 @media(max-width: 868px){
     .container {
         width: 90%;

@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text } from "../components/Text";
 import style from "../styling/rotationPlan.module.css"
-import handsImage from "../assets/pappous.png"
+import cropRotationImage from "../assets/crop_rotation.png"
 import PolygonMap from "../components/PolygonMap";
+import { CheckBox } from "../components/CheckBox";
 
 const RotationPlan = () => {
     const handlePolygonCreate = (coords) => {
-        console.log('Ο χρήστης σχεδίασε πολύγωνο με συντεταγμένες:', coords);
-      };
+        console.log('coordinates:', coords);
+    };
+
+    const [value, setValue] = useState<number>(3);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(Number(e.target.value));
+    }
 
     return (
         <>
@@ -22,11 +29,12 @@ const RotationPlan = () => {
                         </Text>
                     </div>
                     <div className={style.image_box}>
-                        <img src={handsImage} alt="hands" className={style.image} />
+                        <img src={cropRotationImage} alt="hands" className={style.image} />
                     </div>
                 </div>
                 <div className={style.calligraphic}>
-                    <Text variant="calligraphic_title"
+                    <Text
+                        variant="calligraphic_title"
                         color="white"
                         as="h3">
                         Let’s rotate it right!
@@ -35,7 +43,8 @@ const RotationPlan = () => {
             </section>
             <section className={style.field_info_container}>
                 <div className={style.field_info_box}>
-                    <Text variant="secondary_title"
+                    <Text
+                        variant="secondary_title"
                         color="black"
                         as="h2">
                         Draw your field on the map.
@@ -46,13 +55,42 @@ const RotationPlan = () => {
                 </div>
 
                 <div className={style.field_info_box}>
-                <Text variant="secondary_title"
+                    <Text
+                        variant="secondary_title"
                         color="black"
                         as="h2">
-                        Draw your field on the map.
+                        Which crops do you want in rotation plan?
+                    </Text>
+
+                    <div className={style.checkBox_container}>
+                        <CheckBox />
+                    </div>
+                </div>
+
+                <div className={style.field_info_box}>
+                    <Text
+                        variant="secondary_title"
+                        color="black"
+                        as="h2">
+                        How many years do you want to be your rotation plan?
+                    </Text>
+                    <input 
+                        type="range"
+                        min="3"
+                        max="15"
+                        value={value}
+                        onChange={handleChange}
+                        className={style.spinner}/>
+                    <Text
+                        variant="main_text"
+                        color="black"
+                        as="p">
+                        {value} years
                     </Text>
                 </div>
             </section>
+
+
         </>
     );
 }

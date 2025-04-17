@@ -1,9 +1,17 @@
 import React, { Children } from "react";
-import clsx from "clsx"
-import { small } from "framer-motion/client";
 
 type Props = {
-    variant?: 'header_title' | 'button_text' | 'main_title' | 'calligraphic_title' | 'secondary_title' | 'main_text' | 'box_title' | 'box_text' | 'small_text';
+    variant?:   
+        'header_title' |
+        'button_text' |
+        'main_title' |
+        'calligraphic_title' |
+        'secondary_title' |
+        'main_text' |
+        'box_title' |
+        'box_text' |
+        'small_text' |
+        "label";
     color?: 'white' | 'black' | 'green';
     fontSize?: string;
     children: React.ReactNode;
@@ -12,7 +20,7 @@ type Props = {
     style?: React.CSSProperties;
 };
 
-const fontFamilies  = {
+const fontFamilies = {
     header_title: "'Playfair Display', serif",
     button_text: "'Playfair Display', serif",
     main_title: "'Playfair Display', serif",
@@ -22,9 +30,10 @@ const fontFamilies  = {
     box_title: "Georgia, 'Times New Roman', Times, serif",
     box_text: "Georgia, 'Times New Roman', Times, serif",
     small_text: "Georgia, 'Times New Roman', Times, serif",
+    label: "Georgia, 'Times New Roman', Times, serif",
 };
 
-const colors  = {
+const colors = {
     white: '#ffffff',
     black: '#000000',
     green: '#3b4d35',
@@ -39,7 +48,8 @@ const fontSizes = {
     main_text: 'clamp(1rem, 3.5vw, 1.7rem)',
     box_title: 'clamp(1.5rem, 2.5vw, 1.9rem)',
     box_text: 'clamp(1.2rem, 2vw, 1.2rem)',
-    small_text: 'clamp(1.2rem, 2vw, 1.2rem)'
+    small_text: 'clamp(1.2rem, 2vw, 1.2rem)',
+    label: 'clamp(1.1rem, 1.5vw, 1.4rem)'
 };
 
 export const Text = ({
