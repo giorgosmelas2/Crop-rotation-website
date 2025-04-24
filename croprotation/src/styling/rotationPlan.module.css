@@ -102,6 +102,18 @@
 }
 
 
+.add_button {
+    background-color: #3b4d35;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    margin-top: 0.5rem;
+  }
+
+
 @media(max-width: 868px){
     .container {
         width: 90%;

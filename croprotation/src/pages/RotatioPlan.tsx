@@ -4,17 +4,37 @@ import style from "../styling/rotationPlan.module.css"
 import cropRotationImage from "../assets/crop_rotation.png"
 import PolygonMap from "../components/PolygonMap";
 import { CheckBox } from "../components/CheckBox";
+import CropInputPair from "../components/CropInputPair";
 
 const RotationPlan = () => {
-    const handlePolygonCreate = (coords) => {
-        console.log('coordinates:', coords);
+    // State to manage the number of years for the rotation plan
+    const [value, setValue] = useState<number>(3);
+
+    const [cropPairs, setCropPairs] = useState([["", ""]]);
+
+    const addCropPair = () => {
+        setCropPairs([...cropPairs, ["", ""]]);
     };
 
-    const [value, setValue] = useState<number>(3);
+    const deleteCropPair = (index) => {
+        const newPairs = [...cropPairs];
+        newPairs.splice(index, 1);
+        setCropPairs(newPairs)
+    }
+
+    const updateCropPair = (index, position, value) => {
+        const newPairs = [...cropPairs];
+        newPairs[index][position] = value;
+        setCropPairs(newPairs);
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(Number(e.target.value));
     }
+
+    const handlePolygonCreate = (coords) => {
+        console.log('coordinates:', coords);
+    };
 
     return (
         <>
@@ -37,7 +57,7 @@ const RotationPlan = () => {
                         variant="calligraphic_title"
                         color="white"
                         as="h3">
-                        Let’s rotate it right!
+                        Let's rotate it right!
                     </Text>
                 </div>
             </section>
@@ -74,13 +94,13 @@ const RotationPlan = () => {
                         as="h2">
                         How many years do you want to be your rotation plan?
                     </Text>
-                    <input 
+                    <input
                         type="range"
                         min="3"
                         max="15"
                         value={value}
                         onChange={handleChange}
-                        className={style.spinner}/>
+                        className={style.spinner} />
                     <Text
                         variant="main_text"
                         color="black"
@@ -88,12 +108,28 @@ const RotationPlan = () => {
                         {value} years
                     </Text>
                 </div>
+                <div className={style.field_info_box}>
+                    <Text
+                        variant="secondary_title"
+                        color="black"
+                        as="h2">
+                        Share Your Effective Crop Sequence
+                    </Text>
+                    {cropPairs.map((pair, index) => (
+                        
+                            <CropInputPair
+                            key={index}
+                            index={index}
+                            value1={pair[0]}
+                            value2={pair[1]}
+                            onChange={updateCropPair} 
+                            onDelete={deleteCropPair}/>
+                    ))}
+                    <button onClick={addCropPair} className={style.add_button}>+ Add Crop</button>
+                </div>
             </section>
-
-
         </>
     );
 }
-
 
 export default RotationPlan;
