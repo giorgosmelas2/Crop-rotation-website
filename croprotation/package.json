@@ -10,11 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.2",
+    "leaflet": "^1.9.4",
+    "leaflet-draw": "^1.0.4",
     "motion": "^12.6.3",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-draw": "^0.20.6",
     "react-router-dom": "^7.3.0"
   },
   "devDependencies": {

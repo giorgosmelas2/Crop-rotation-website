@@ -10,74 +10,66 @@ import tractorImage from "../assets/tractor.png"
 const About = () => {
     return (
         <>
-            <section className={style.container}>
-                {/* Section for the main title */}
-                <div className={style.photo}>
-                    <Text
-                        variant="main_title"
-                        color="white"
-                        as="h2">Who am I?</Text>
-                </div>
-
-                {/* Section for displaying short personal information */}
-                <div className={style.green_personal_info_background}>
-                    <div className={style.short_info_container}>
-                        <div className={style.short_info_box}>
-                            <img
-                                src={nameImage}
-                                className={style.info_image}
-                                alt="name" />
-                            <Text
-                                variant="box_text"
-                                color="white"
-                                as="p">
-                                George-Serafeim Melas
-                            </Text>
-                        </div>
-
-                        {/* Box for displaying education information */}
-                        <div className={style.short_info_box}>
-                            <img
-                                src={educationImage}
-                                className={style.info_image}
-                                alt="name" />
-                            <Text
-                                variant="box_text"
-                                color="white"
-                                as="p">
-                                Computer Engineering and Electronic Systems (IHU)
-                            </Text>
-                        </div>
-
-                        {/* Box for displaying focus on AI */}
-                        <div className={style.short_info_box}>
-                            <img
-                                src={aiImage}
-                                className={style.info_image}
-                                alt="name" />
-                            <Text
-                                variant="box_text"
-                                color="white"
-                                as="p">
-                                Focus on Artificial Intelligence
-                            </Text>
-                        </div>
-                        {/* Section for extended personal information */}
-                        <div className={style.short_info_box}>
-                            <img
-                                src={tractorImage}
-                                className={style.info_image}
-                                alt="name" />
-                            <Text
-                                variant="box_text"
-                                color="white"
-                                as="p">
-                                From a farming family
-                            </Text>
-                        </div>
+            <section className={style.photo}>
+                <Text
+                    variant="main_title"
+                    color="white"
+                    as="h2">Who am I?</Text>
+            </section>
+            <section className={style.green_personal_info_background}>
+                <div className={style.short_info_container}>
+                    <div className={style.short_info_box}>
+                        <img
+                            src={nameImage}
+                            className={style.info_image}
+                            alt="name" />
+                        <Text
+                            variant="box_text"
+                            color="white"
+                            as="p">
+                            George-Serafeim Melas
+                        </Text>
+                    </div>
+                    <div className={style.short_info_box}>
+                        <img
+                            src={educationImage}
+                            className={style.info_image}
+                            alt="name" />
+                        <Text
+                            variant="box_text"
+                            color="white"
+                            as="p">
+                            Computer Engineering and Electronic Systems (IHU)
+                        </Text>
+                    </div>
+                    <div className={style.short_info_box}>
+                        <img
+                            src={aiImage}
+                            className={style.info_image}
+                            alt="name" />
+                        <Text
+                            variant="box_text"
+                            color="white"
+                            as="p">
+                            Focus on Artificial Intelligence
+                        </Text>
+                    </div>
+                    <div className={style.short_info_box}>
+                        <img
+                            src={tractorImage}
+                            className={style.info_image}
+                            alt="name" />
+                        <Text
+                            variant="box_text"
+                            color="white"
+                            as="p">
+                            From a farming family
+                        </Text>
                     </div>
                 </div>
-                <div className={style.bottom_title}>
+            </section>
+            <section className={style.info_text}>
+                <div className={style.extended_info_container}>
                     <Text
                         variant="secondary_title"
                         color="black"
@@ -85,14 +77,6 @@ const About = () => {
                         A Few Words About Me
                         <AnimatedDots />
                     </Text>
-
-                </div>
-            </section>
-
-            {/* Container for detailed personal information */}
-            <section className={style.info_text}>
-                <div className={style.extended_info_container}>
-
                     <div className={style.extended_info_box}>
                         <Text
                             variant="main_text"

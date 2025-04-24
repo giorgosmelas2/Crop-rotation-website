@@ -1,22 +1,6 @@
-.container {
-    width: 100%;
-    height: 90vh;
-    position: relative;
-    margin-bottom: 3rem;
-}
-
-.bottom_title {
-    width: 100%;
-    min-height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-}
-
 .photo {
     width: 100%;
-    height: 35vh;
+    min-height: 40vh;
     background-image: url("../assets/fields.png");
     background-size: cover;
     background-position: center;
@@ -51,6 +35,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 2em;
 }
 
 .short_info_container {
@@ -90,5 +75,5 @@
     padding: 1.5em;
     line-height: 1.6;
     margin-bottom: 1em;
-    /* margin-top: 1em; */
+    margin-top: 2em;
 }

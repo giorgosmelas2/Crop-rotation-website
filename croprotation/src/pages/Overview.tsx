@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "../components/Text";
 import style from "../styling/overview.module.css"
-import recycleImage from "../assets/recycle.png"
+import arrowsImage from "../assets/cycle.png"
 
 
 const Overview = () => {
@@ -57,7 +57,7 @@ const Overview = () => {
                             cellular automata are used to represent spatial distribution and soil.
                         </Text>
                     </div>
-                    <img src={recycleImage} alt="recycle" className={style.icon} />
+                    <img src={arrowsImage} alt="recycle" className={style.icon} />
                     <div className={style.pink}>
                         <Text variant="main_text"
                             color="black"

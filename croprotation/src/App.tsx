@@ -6,6 +6,7 @@ import About from "./pages/About";
 import RotationPlan from "./pages/RotatioPlan";
 import Overview from "./pages/Overview";
 import Login from "./pages/Login";
+import Account from "./pages/account";
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="rotationplan" element={<RotationPlan />} />
         <Route path="overview" element={<Overview />} />
         <Route path="login" element={<Login />} />
+        <Route path="/account" element={<Account />} />
       </Route>
     </Routes>
   </BrowserRouter>
