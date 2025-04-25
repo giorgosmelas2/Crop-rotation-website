@@ -8,36 +8,65 @@ import CropInputPair from "../components/CropInputPair";
 
 const RotationPlan = () => {
     // State to manage the number of years for the rotation plan
-    const [value, setValue] = useState<number>(3);
+    const [years, setyears] = useState<number>(3);
 
-    const [cropPairs, setCropPairs] = useState([["", ""]]);
+    // State to manage effective crop pairs
+    const [effectivecropPairs, setEffectiveCropPairs] = useState([["", ""]]);
 
-    const addCropPair = () => {
-        setCropPairs([...cropPairs, ["", ""]]);
+    // Add a new effective crop pair
+    const addEffectiveCropPair = () => {
+        setEffectiveCropPairs([...effectivecropPairs, ["", ""]]);
     };
 
-    const deleteCropPair = (index) => {
-        const newPairs = [...cropPairs];
+    // Delete an effective crop pair by index
+    const deleteEffectiveCropPair = (index) => {
+        const newPairs = [...effectivecropPairs];
         newPairs.splice(index, 1);
-        setCropPairs(newPairs)
+        setEffectiveCropPairs(newPairs)
     }
 
-    const updateCropPair = (index, position, value) => {
-        const newPairs = [...cropPairs];
+    // Update an effective crop pair by index and position (0 or 1)
+    const updateEffectiveCropPair = (index, position, value) => {
+        const newPairs = [...effectivecropPairs];
         newPairs[index][position] = value;
-        setCropPairs(newPairs);
+        setEffectiveCropPairs(newPairs);
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(Number(e.target.value));
+    // State to manage uneffective crop pairs
+    const [uneffectiveCropPairs, setUneffectiveCropPairs] = useState([["", ""]]);
+
+    // Add a new uneffective crop pair
+    const addUneffectiveCropPair = () => {
+        setUneffectiveCropPairs([...uneffectiveCropPairs, ["", ""]]);
     }
 
+    // Delete an uneffective crop pair by index
+    const deleteUneffectiveCropPair = (index) => {
+        const newPairs = [...uneffectiveCropPairs];
+        newPairs.splice(index, 1);
+        setUneffectiveCropPairs(newPairs);
+    }
+
+    // Update an uneffective crop pair by index and position (0 or 1)
+    const updateUneffectiveCropPair = (index, position, value) => {
+        const newPairs = [...uneffectiveCropPairs];
+        newPairs[index][position] = value;
+        setUneffectiveCropPairs(newPairs);
+    }
+
+    // Handle change in the range input for years
+    const handleYearsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setyears(Number(e.target.value));
+    }
+
+    // Handle polygon creation on the map
     const handlePolygonCreate = (coords) => {
         console.log('coordinates:', coords);
     };
 
     return (
         <>
+            {/* Section for the introduction */}
             <section className={style.green}>
                 <div className={style.container}>
                     <div className={style.box}>
@@ -45,7 +74,7 @@ const RotationPlan = () => {
                             variant="secondary_title"
                             color="white"
                             as="h2">
-                            Tell us about your field, and we’ll tell you what to grow next – smarter soil, happier harvest!
+                            Tell us about your field, and we'll tell you what to grow next - smarter soil, happier harvest!
                         </Text>
                     </div>
                     <div className={style.image_box}>
@@ -61,7 +90,11 @@ const RotationPlan = () => {
                     </Text>
                 </div>
             </section>
+
+            {/* Section for field information */}
             <section className={style.field_info_container}>
+
+                {/* Map drawing section */}
                 <div className={style.field_info_box}>
                     <Text
                         variant="secondary_title"
@@ -74,6 +107,7 @@ const RotationPlan = () => {
                     </div>
                 </div>
 
+                {/* Checkbox section */}
                 <div className={style.field_info_box}>
                     <Text
                         variant="secondary_title"
@@ -87,6 +121,7 @@ const RotationPlan = () => {
                     </div>
                 </div>
 
+                {/* Rotation plan duration section */}
                 <div className={style.field_info_box}>
                     <Text
                         variant="secondary_title"
@@ -98,16 +133,18 @@ const RotationPlan = () => {
                         type="range"
                         min="3"
                         max="15"
-                        value={value}
-                        onChange={handleChange}
+                        value={years}
+                        onChange={handleYearsChange}
                         className={style.spinner} />
                     <Text
                         variant="main_text"
                         color="black"
                         as="p">
-                        {value} years
+                        {years} years
                     </Text>
                 </div>
+
+                {/* Effective crop sequence section */}
                 <div className={style.field_info_box}>
                     <Text
                         variant="secondary_title"
@@ -115,17 +152,37 @@ const RotationPlan = () => {
                         as="h2">
                         Share Your Effective Crop Sequence
                     </Text>
-                    {cropPairs.map((pair, index) => (
-                        
-                            <CropInputPair
+                    {effectivecropPairs.map((pair, index) => (
+
+                        <CropInputPair
                             key={index}
                             index={index}
                             value1={pair[0]}
                             value2={pair[1]}
-                            onChange={updateCropPair} 
-                            onDelete={deleteCropPair}/>
+                            onChange={updateEffectiveCropPair}
+                            onDelete={deleteEffectiveCropPair} />
                     ))}
-                    <button onClick={addCropPair} className={style.add_button}>+ Add Crop</button>
+                    <button onClick={addEffectiveCropPair} className={style.add_button}>+ Add Crops</button>
+                </div>
+
+                {/* Uneffective crop sequence section */}
+                <div className={style.field_info_box}>
+                    <Text
+                        variant="secondary_title"
+                        color="black"
+                        as="h2">
+                        Share Your Uneffective Crop Sequence
+                    </Text>
+                    {uneffectiveCropPairs.map((pair, index) => (
+                        <CropInputPair
+                            key={index}
+                            index={index}
+                            value1={pair[0]}
+                            value2={pair[1]}
+                            onChange={updateUneffectiveCropPair}
+                            onDelete={deleteUneffectiveCropPair} />
+                    ))}
+                    <button onClick={addUneffectiveCropPair} className={style.add_button}>+ Add Crops</button>
                 </div>
             </section>
         </>

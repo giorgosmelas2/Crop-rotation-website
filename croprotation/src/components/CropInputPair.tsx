@@ -3,7 +3,7 @@ import style from "../styling/cropInputPair.module.css";
 import binImage from "../assets/bin.png";
 import arrowImage from "../assets/arrow.png";
 
-const CropInputPair = ({ index, value1, value2, onChange, onDelete  }) => {
+const CropInputPair = ({ index, value1, value2, onChange, onDelete }) => {
     const crops = [
         "All",
         "Wheat",
@@ -50,13 +50,11 @@ const CropInputPair = ({ index, value1, value2, onChange, onDelete  }) => {
                     <option key={crop} value={crop}>
                         {crop}
                     </option>
-
                 ))}
             </select>
             <div className={style.icon_wrapper}>
-            <img src={arrowImage} alt="Delete" className={style.icon} />
+                <img src={arrowImage} alt="Delete" className={style.icon} />
             </div>
-            
             <select
                 value={value2}
                 onChange={(e) => onChange(index, 1, e.target.value)}
