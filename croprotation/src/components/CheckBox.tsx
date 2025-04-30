@@ -2,43 +2,13 @@ import React, { useEffect, useState } from "react";
 import style from "../styling/checkbox.module.css";
 import { Text } from "./Text";
 
-const crops = [
-  "All",
-  "Wheat",
-  "Barley",
-  "Corn",
-  "Rice",
-  "Cotton",
-  "Sugar beet",
-  "Sunflower",
-  "Rapeseed",
-  "Alfalfa",
-  "Silage Corn",
-  "Pea",
-  "Lentil",
-  "Bean",
-  "Peanut",
-  "Potato",
-  "Tomato",
-  "Cucumber",
-  "Pepper",
-  "Eggplant",
-  "Onion",
-  "Garlic",
-  "Watermelon",
-  "Melon",
-  "Zucchini",
-  "Vineyard",
-  "Olive",
-  "Kiwi",
-  "Citrus",
-  "Pomegranate",
-  "Almond",
-  
-];
+type CheckBoxProps = {
+  crops: string[];
+}
 
-const chunkArray = (arr: string[], size: number): string[][] => {
+const chunkArray = (arr: string[]): string[][] => {
   const result: string[][] = [];
+  const size = Math.floor(arr.length / 5); // Adjust the size as needed 
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size));
   }
@@ -46,8 +16,8 @@ const chunkArray = (arr: string[], size: number): string[][] => {
 };
 
 
-export const CheckBox: React.FC = () => {
-  const [chunkSize, setChunkSize] = useState<number>(5); // Default chunk size
+export const CheckBox: React.FC<CheckBoxProps> = ({crops}) => {
+  const [chunkSize, setChunkSize] = useState<number>(); // Default chunk size
 
   useEffect(() => {
     const updateChunkSize = () => {
@@ -64,7 +34,7 @@ export const CheckBox: React.FC = () => {
     return () => window.removeEventListener("resize", updateChunkSize); // Cleanup event listener on unmount
   }, []);
 
-  const chunkedCrops = chunkArray(crops, chunkSize); // Adjust the size as needed (5 crops per row)
+  const chunkedCrops = chunkArray(crops); // Adjust the size as needed (5 crops per row)
 
   return (
     <>

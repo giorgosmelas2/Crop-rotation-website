@@ -59,9 +59,38 @@ const RotationPlan = () => {
         setyears(Number(e.target.value));
     }
 
+    // State to manage selected crops from the checkbox
+    const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
+
     // Handle polygon creation on the map
-    const handlePolygonCreate = (coords) => {
-        console.log('coordinates:', coords);
+    const handlePolygonCreate = async (coords) => {
+        if (!coords || coords.length === 0) return;
+
+        const { lat, lon } = getCentroid(coords);
+
+        try {
+            const response = await fetch("http://localhost:8000/api/suggest-crops",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ lat, lon }),
+            });
+            const data = await response.json();
+            setSelectedCrops(data.suitable_crops);
+        } catch (error) {
+            console.error("Error fetching suitable crops:", error);
+        }
+    };
+
+    // Function to calculate the centroid of the polygon
+    const getCentroid = (coords) => {
+        const latSum = coords.reduce((sum, point) => sum + point.lat, 0);
+        const lngSum = coords.reduce((sum, point) => sum + point.lng, 0);
+        return {
+            lat: latSum / coords.length,
+            lon: lngSum / coords.length,
+        };
     };
 
     return (
@@ -103,7 +132,7 @@ const RotationPlan = () => {
                         Draw your field on the map.
                     </Text>
                     <div className={style.map}>
-                        <PolygonMap onPolygonCreate={handlePolygonCreate} />
+                        <PolygonMap onPolygonCreate={(latlon) => handlePolygonCreate(latlon)} />
                     </div>
                 </div>
 
@@ -117,7 +146,7 @@ const RotationPlan = () => {
                     </Text>
 
                     <div className={style.checkBox_container}>
-                        <CheckBox />
+                        <CheckBox crops={selectedCrops}/>
                     </div>
                 </div>
 
