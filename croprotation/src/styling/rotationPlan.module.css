@@ -1,9 +1,9 @@
 .green {
     background-image: repeating-linear-gradient(to right,
-    #3b4d35 0px,
-    #32442e 1px,
-    #3b4d35 1px,
-    #3b4d35 10px);
+            #3b4d35 0px,
+            #32442e 1px,
+            #3b4d35 1px,
+            #3b4d35 10px);
     width: 100%;
     height: 90vh;
     display: flex;
@@ -38,11 +38,11 @@
 
 .image {
     width: clamp(10rem, 35vw, 30rem);
-    height: clamp(10rem,45vh, 35rem);
+    height: clamp(10rem, 45vh, 35rem);
     border-radius: 8px;
 }
 
-.image_box{
+.image_box {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,10 +111,46 @@
     border-radius: 0.5rem;
     border: none;
     margin-top: 0.5rem;
-  }
+}
+
+.soil_info_container {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.soil_info_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.soil_category_input {
+    width: 9rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #3b4d35;
+    border: 1px solid #3b4d35;
+    border-radius: 0.5rem;
+}
+
+.soi_inputs {
+    width: 9rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #3b4d35;
+    border: 1px solid #3b4d35;
+    border-radius: 0.5rem;
+}
 
 
-@media(max-width: 868px){
+@media(max-width: 868px) {
     .container {
         width: 90%;
         flex-direction: column;
@@ -122,7 +158,7 @@
 
     .image {
         width: clamp(10rem, 90vw, 80rem);
-        height: clamp(10rem,45vh, 35rem);
+        height: clamp(10rem, 45vh, 35rem);
     }
 
     .box {
@@ -130,6 +166,3 @@
         text-align: center;
     }
 }
-
-
-

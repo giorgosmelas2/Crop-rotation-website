@@ -3,41 +3,8 @@ import style from "../styling/cropInputPair.module.css";
 import binImage from "../assets/bin.png";
 import arrowImage from "../assets/arrow.png";
 
-const CropInputPair = ({ index, value1, value2, onChange, onDelete }) => {
-    const crops = [
-        "All",
-        "Wheat",
-        "Barley",
-        "Corn",
-        "Rice",
-        "Cotton",
-        "Sugar beet",
-        "Sunflower",
-        "Rapeseed",
-        "Alfalfa",
-        "Silage Corn",
-        "Pea",
-        "Lentil",
-        "Bean",
-        "Peanut",
-        "Potato",
-        "Tomato",
-        "Cucumber",
-        "Pepper",
-        "Eggplant",
-        "Onion",
-        "Garlic",
-        "Watermelon",
-        "Melon",
-        "Zucchini",
-        "Vineyard",
-        "Olive",
-        "Kiwi",
-        "Citrus",
-        "Pomegranate",
-        "Almond",
-
-    ];
+const CropInputPair = ({ index, value1, value2, crops, onChange, onDelete  }) => {
+    
 
     return (
         <div className={style.crop_pair}>
