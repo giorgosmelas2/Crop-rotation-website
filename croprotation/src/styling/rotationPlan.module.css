@@ -131,8 +131,8 @@
     flex-direction: column;
 }
 
-.soil_category_input {
-    width: 9rem;
+.select_input {
+    width: 10.5rem;
     padding: 0.5rem;
     font-size: 1rem;
     color: #3b4d35;
@@ -149,6 +149,16 @@
     border-radius: 0.5rem;
 }
 
+.submit_button {
+    background-color: #3b4d35;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    margin-bottom: 3rem;
+}
 
 @media(max-width: 868px) {
     .container {

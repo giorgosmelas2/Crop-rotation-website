@@ -10,11 +10,27 @@ import CropInputPair from "../components/CropInputPair";
 import { map } from "framer-motion/client";
 
 const RotationPlan = () => {
-    // State to manage the number of years for the rotation plan
     const [years, setyears] = useState<number>(3);
+    const [texture, setTexture] = useState("");
+    const [irrigation, setIrrigation] = useState("");
+    const [nitrogenValue, setNitrogenValue] = useState("");
+    const [phosphorusValue, setPhosphorusValue] = useState("");
+    const [potassiumValue, setPotassiumValue] = useState("");
+    const [pHValue, setPHValue] = useState("");
 
-    // State to manage effective crop pairs
+    const [pastYearCrop3, setPastYearCrop3] = useState("");
+    const [pastYearCrop2, setPastYearCrop2] = useState("");
+    const [pastYearCrop1, setPastYearCrop1] = useState("");
+
     const [effectivecropPairs, setEffectiveCropPairs] = useState([["", ""]]);
+    const [uneffectiveCropPairs, setUneffectiveCropPairs] = useState([["", ""]]);
+
+    const [soilCategories, setSoilCategories] = useState<string[]>([]);
+    const [allCrops, setAllCrops] = useState<string[]>([]);
+    const [suggestedCrops, setSuggestedCropsCrops] = useState<string[]>([]);
+
+    const [selectedSuggestedCrops, setSelectedSuggestedCrops] = useState<string[]>([]);
+    const [selectedAllCrops, setSelectedAllCrops] = useState<string[]>([]);
 
     // Add a new effective crop pair
     const addEffectiveCropPair = () => {
@@ -34,9 +50,6 @@ const RotationPlan = () => {
         newPairs[index][position] = value;
         setEffectiveCropPairs(newPairs);
     }
-
-    // State to manage uneffective crop pairs
-    const [uneffectiveCropPairs, setUneffectiveCropPairs] = useState([["", ""]]);
 
     // Add a new uneffective crop pair
     const addUneffectiveCropPair = () => {
@@ -62,9 +75,7 @@ const RotationPlan = () => {
         setyears(Number(e.target.value));
     }
 
-    //State to manage soil's categories
-    const [soilCategories, setSoilCategories] = useState<string[]>([]);
-
+    // Fetch soil categories from the database on component mount
     useEffect(() => {
         const fetchSoilInfo = async () => {
             try {
@@ -84,8 +95,6 @@ const RotationPlan = () => {
         fetchSoilInfo();
     }, [])
 
-    //State to manage all crops that are avaoilable in database
-    const [allCrops, setAllCrops] = useState<string[]>([]);
 
     // Fetch all crops from the database on component mount
     useEffect(() => {
@@ -105,10 +114,6 @@ const RotationPlan = () => {
         };
         fetchAllCrops();
     }, [])
-
-
-    // State to manage selected crops from the checkbox
-    const [suggestedCrops, setSuggestedCropsCrops] = useState<string[]>([]);
 
     // Handle polygon creation on the map
     const handlePolygonCreate = async (coords) => {
@@ -141,6 +146,41 @@ const RotationPlan = () => {
             lat: latSum / coords.length,
             lon: lngSum / coords.length,
         };
+    };
+
+    const handleSubmit = async () => {
+        const cleanedCrops = [...new Set([...selectedSuggestedCrops, ...selectedAllCrops])].filter((crop) => crop !== "All crops");
+
+        const payload = {
+            crops: cleanedCrops,
+            texture: texture,
+            irrigation: irrigation,
+            nitrogen: nitrogenValue,
+            phosphorus: phosphorusValue,
+            potassium: potassiumValue,
+            pH: pHValue,
+            past_crops: [pastYearCrop3, pastYearCrop2, pastYearCrop1].filter(Boolean),
+            effective_pairs: effectivecropPairs.filter(pair => pair[0] && pair[1]),
+            uneffective_pairs: uneffectiveCropPairs.filter(pair => pair[0] && pair[1]),
+            years: years
+        };
+
+        console.log("Payload to be sent:", payload);
+
+        try {
+            const res = await fetch("http://localhost:8000/api/rotation-plan", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await res.json();
+            console.log("Response from backend:", data);
+        } catch (err) {
+            console.error("Submission failed:", err);
+        }
     };
 
     return (
@@ -179,7 +219,7 @@ const RotationPlan = () => {
                         variant="secondary_title"
                         color="black"
                         as="h2">
-                        Draw your field on the map.
+                        Map Your Field.
                     </Text>
                     <div className={style.map}>
                         <PolygonMap onPolygonCreate={(latlon) => handlePolygonCreate(latlon)} />
@@ -187,18 +227,23 @@ const RotationPlan = () => {
                 </div>
 
                 {/* Suggested crops */}
-                <div className={style.field_info_box}>
-                    <Text
-                        variant="secondary_title"
-                        color="black"
-                        as="h2">
-                        {suggestedCrops.length > 0 ? "Here are some recommended crops that suit the climate of the field" : "Draw your field on the map to get crop suggestions!"}
-                    </Text>
+                {suggestedCrops.length > 0 && (
+                    <div className={style.field_info_box}>
+                        <Text
+                            variant="secondary_title"
+                            color="black"
+                            as="h2">
+                            Smart Crop Picks
+                        </Text>
 
-                    <div className={style.checkBox_container}>
-                        <CheckBox crops={suggestedCrops} />
+                        <div className={style.checkBox_container}>
+                            <CheckBox
+                                crops={suggestedCrops}
+                                selected={selectedSuggestedCrops}
+                                setSelected={setSelectedSuggestedCrops} />
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* All crops */}
                 <div className={style.field_info_box}>
@@ -206,11 +251,14 @@ const RotationPlan = () => {
                         variant="secondary_title"
                         color="black"
                         as="h2">
-                        Select from all crops
+                        Pick Your Own
                     </Text>
 
                     <div className={style.checkBox_container}>
-                        <CheckBox crops={allCrops} />
+                        <CheckBox
+                            crops={allCrops}
+                            selected={selectedAllCrops}
+                            setSelected={setSelectedAllCrops} />
                     </div>
                 </div>
 
@@ -254,7 +302,9 @@ const RotationPlan = () => {
                                 Texture
                             </Text>
                             <select
-                                className={style.soil_category_input}>
+                                value={texture}
+                                onChange={(e) => setTexture(e.target.value)}
+                                className={style.select_input}>
                                 <option>Select texture</option>
                                 {soilCategories.map((category, index) => (
                                     <option key={index} value={category}>
@@ -271,7 +321,9 @@ const RotationPlan = () => {
                                 Irrigation
                             </Text>
                             <select
-                                className={style.soil_category_input}>
+                                value={irrigation}
+                                onChange={(e) => setIrrigation(e.target.value)}
+                                className={style.select_input}>
                                 <option>Select texture</option>
                                 <option>No irrigation</option>
                                 <option>Limited irrigation </option>
@@ -289,6 +341,8 @@ const RotationPlan = () => {
                                 Nitrogen
                             </Text>
                             <input
+                                value={nitrogenValue}
+                                onChange={(e) => setNitrogenValue(e.target.value)}
                                 type="text"
                                 className={style.soi_inputs}
                                 placeholder="0.0 g/kg " />
@@ -302,6 +356,8 @@ const RotationPlan = () => {
                                 Potassium
                             </Text>
                             <input
+                                value={potassiumValue}
+                                onChange={(e) => setPotassiumValue(e.target.value)}
                                 type="text"
                                 className={style.soi_inputs}
                                 placeholder="0.0 mg/kg " />
@@ -313,9 +369,11 @@ const RotationPlan = () => {
                                 variant="label"
                                 color="black"
                                 as="label">
-                                Nitrogen
+                                Phosphorus
                             </Text>
                             <input
+                                value={phosphorusValue}
+                                onChange={(e) => setPhosphorusValue(e.target.value)}
                                 type="text"
                                 className={style.soi_inputs}
                                 placeholder="0.0 mg/kg" />
@@ -328,12 +386,60 @@ const RotationPlan = () => {
                                 pH
                             </Text>
                             <input
+                                value={pHValue}
+                                onChange={(e) => setPHValue(e.target.value)}
                                 type="text"
                                 className={style.soi_inputs}
                                 placeholder="0.0" />
                         </div>
                     </div>
-                   
+
+                </div>
+
+                {/* Past crops section */}
+                <div className={style.field_info_box}>
+                    <Text
+                        variant="secondary_title"
+                        color="black"
+                        as="h2">
+                        Add your last 3 years of crops to help with rotation planning
+                    </Text>
+                    <select
+                        value={pastYearCrop3}
+                        onChange={(e) => setPastYearCrop3(e.target.value)}
+                        className={style.select_input}
+                        style={{ marginBottom: "1.5rem" }} >
+                        <option>3 years ago</option>
+                        {allCrops.map((crop, index) => (
+                            <option key={index} value={crop}>
+                                {crop}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={pastYearCrop2}
+                        onChange={(e) => setPastYearCrop2(e.target.value)}
+                        className={style.select_input}
+                        style={{ marginBottom: "1.5rem" }}>
+                        <option>2 years ago</option>
+                        {allCrops.map((crop, index) => (
+                            <option key={index} value={crop}>
+                                {crop}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={pastYearCrop1}
+                        onChange={(e) => setPastYearCrop1(e.target.value)}
+                        className={style.select_input}
+                        style={{ marginBottom: "1.5rem" }}>
+                        <option>Last year</option>
+                        {allCrops.map((crop, index) => (
+                            <option key={index} value={crop}>
+                                {crop}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Effective crop sequence section */}
@@ -377,6 +483,11 @@ const RotationPlan = () => {
                     ))}
                     <button onClick={addUneffectiveCropPair} className={style.add_button}>+ Add Crops</button>
                 </div>
+                <button 
+                    className={style.submit_button}
+                    onClick={handleSubmit}>
+                    Submit
+                </button>
             </section>
         </>
     );

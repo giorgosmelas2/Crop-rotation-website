@@ -5,7 +5,7 @@ import arrowImage from "../assets/arrow.png";
 
 const CropInputPair = ({ index, value1, value2, crops, onChange, onDelete  }) => {
     
-
+    
     return (
         <div className={style.crop_pair}>
             <select
