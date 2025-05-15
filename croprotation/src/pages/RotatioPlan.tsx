@@ -22,8 +22,12 @@ const RotationPlan = () => {
     const [pastYearCrop2, setPastYearCrop2] = useState("");
     const [pastYearCrop1, setPastYearCrop1] = useState("");
 
-    const [effectivecropPairs, setEffectiveCropPairs] = useState([["", ""]]);
-    const [uneffectiveCropPairs, setUneffectiveCropPairs] = useState([["", ""]]);
+    const [effectivecropPairs, setEffectiveCropPairs] = useState([
+        {crop1: "", crop2: "", value: 2}
+    ]);
+    const [uneffectiveCropPairs, setUneffectiveCropPairs] = useState([
+        {crop1: "", crop2: "", value: 2}
+    ]);
 
     const [soilCategories, setSoilCategories] = useState<string[]>([]);
     const [allCrops, setAllCrops] = useState<string[]>([]);
@@ -34,7 +38,7 @@ const RotationPlan = () => {
 
     // Add a new effective crop pair
     const addEffectiveCropPair = () => {
-        setEffectiveCropPairs([...effectivecropPairs, ["", ""]]);
+        setEffectiveCropPairs([...effectivecropPairs, { crop1: "", crop2: "", value: 2 }]);
     };
 
     // Delete an effective crop pair by index
@@ -47,13 +51,13 @@ const RotationPlan = () => {
     // Update an effective crop pair by index and position (0 or 1)
     const updateEffectiveCropPair = (index, position, value) => {
         const newPairs = [...effectivecropPairs];
-        newPairs[index][position] = value;
+        newPairs[index][position === 0 ? "crop1" : "crop2"] = value;
         setEffectiveCropPairs(newPairs);
     }
 
     // Add a new uneffective crop pair
     const addUneffectiveCropPair = () => {
-        setUneffectiveCropPairs([...uneffectiveCropPairs, ["", ""]]);
+        setUneffectiveCropPairs([...uneffectiveCropPairs, { crop1: "", crop2: "", value: 2 }]);
     }
 
     // Delete an uneffective crop pair by index
@@ -66,7 +70,21 @@ const RotationPlan = () => {
     // Update an uneffective crop pair by index and position (0 or 1)
     const updateUneffectiveCropPair = (index, position, value) => {
         const newPairs = [...uneffectiveCropPairs];
-        newPairs[index][position] = value;
+        newPairs[index][position === 0 ? "crop1" : "crop2"] = value;
+        setUneffectiveCropPairs(newPairs);
+    }
+
+    //Update effective crop pair value
+    const updateEffectiveCropPairValue = (index, value) => {
+        const newPairs = [ ...effectivecropPairs];
+        newPairs[index].value = value;
+        setEffectiveCropPairs(newPairs);
+    }
+
+    //Update uneffective crop pair value
+    const updateUneffectiveCropPairValue = (index, value) => {  
+        const newPairs = [ ...uneffectiveCropPairs];
+        newPairs[index].value = value;
         setUneffectiveCropPairs(newPairs);
     }
 
@@ -160,15 +178,15 @@ const RotationPlan = () => {
             potassium: potassiumValue,
             pH: pHValue,
             past_crops: [pastYearCrop3, pastYearCrop2, pastYearCrop1].filter(Boolean),
-            effective_pairs: effectivecropPairs.filter(pair => pair[0] && pair[1]),
-            uneffective_pairs: uneffectiveCropPairs.filter(pair => pair[0] && pair[1]),
+            effective_pairs: effectivecropPairs.filter(pair => pair.crop1 && pair.crop2),
+            uneffective_pairs: uneffectiveCropPairs.filter(pair => pair.crop1 && pair.crop2),
             years: years
         };
 
         console.log("Payload to be sent:", payload);
 
         try {
-            const res = await fetch("http://localhost:8000/api/rotation-plan", {
+            const res = await fetch("http://localhost:8000/api/rotation-info", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -333,6 +351,25 @@ const RotationPlan = () => {
                         </div>
                     </div>
                     <div className={style.soil_info_container}>
+                    <div className={style.soil_info_box}>
+                            <Text
+                                variant="label"
+                                color="black"
+                                as="label">
+                                fertilization
+                            </Text>
+                            <select
+                                value={irrigation}
+                                onChange={(e) => setIrrigation(e.target.value)}
+                                className={style.select_input}>
+                                <option>Select texture</option>
+                                <option>No fertilization</option>
+                                <option>Limited fertilization </option>
+                                <option>Fertilized</option>
+                                <option>Fully fertilized </option>
+                            </select>
+                        </div>
+                    
                         <div className={style.soil_info_box}>
                             <Text
                                 variant="label"
@@ -347,8 +384,9 @@ const RotationPlan = () => {
                                 className={style.soi_inputs}
                                 placeholder="0.0 g/kg " />
                         </div>
-
-                        <div className={style.soil_info_box}>
+                    </div>
+                    <div className={style.soil_info_container}>
+                    <div className={style.soil_info_box}>
                             <Text
                                 variant="label"
                                 color="black"
@@ -362,8 +400,6 @@ const RotationPlan = () => {
                                 className={style.soi_inputs}
                                 placeholder="0.0 mg/kg " />
                         </div>
-                    </div>
-                    <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text
                                 variant="label"
@@ -378,6 +414,8 @@ const RotationPlan = () => {
                                 className={style.soi_inputs}
                                 placeholder="0.0 mg/kg" />
                         </div>
+                    </div>
+                    <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text
                                 variant="label"
@@ -454,10 +492,13 @@ const RotationPlan = () => {
                         <CropInputPair
                             key={index}
                             index={index}
-                            value1={pair[0]}
-                            value2={pair[1]}
+                            value1={pair.crop1}
+                            value2={pair.crop2}
+                            value={pair.value}
                             crops={allCrops}
+                            whichPair={"effective"}
                             onChange={updateEffectiveCropPair}
+                            onValueChange={updateEffectiveCropPairValue}
                             onDelete={deleteEffectiveCropPair} />
                     ))}
                     <button onClick={addEffectiveCropPair} className={style.add_button}>+ Add Crops</button>
@@ -475,10 +516,13 @@ const RotationPlan = () => {
                         <CropInputPair
                             key={index}
                             index={index}
-                            value1={pair[0]}
-                            value2={pair[1]}
+                            value1={pair.crop1}
+                            value2={pair.crop2}
+                            value={pair.value}
                             crops={allCrops}
+                            whichPair={"uneffective"}
                             onChange={updateUneffectiveCropPair}
+                            onValueChange={updateUneffectiveCropPairValue}
                             onDelete={deleteUneffectiveCropPair} />
                     ))}
                     <button onClick={addUneffectiveCropPair} className={style.add_button}>+ Add Crops</button>

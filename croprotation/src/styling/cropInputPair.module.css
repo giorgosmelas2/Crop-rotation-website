@@ -41,4 +41,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
+.spinner {
+    accent-color: #3b4d35;
+}

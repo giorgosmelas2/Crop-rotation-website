@@ -19,7 +19,11 @@ const PolygonMap = ({ onPolygonCreate }) => {
         <MapContainer
             center={[39.0742, 21.8243] as [number, number]}
             zoom={6}
-            style={{ height: '100%', width: '100%' }}>
+            minZoom={6}
+            maxZoom={18}
+            style={{ height: '100%', width: '100%' }}
+            maxBounds={[[34.5, 19.0], [42.0, 29.5]]}
+            maxBoundsViscosity={1.0}>
             <TileLayer
                 attribution='&copy; OpenStreetMap contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
