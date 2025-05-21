@@ -35,7 +35,7 @@ const RotationPlan = () => {
     const [allCrops, setAllCrops] = useState<string[]>([]);
     const [suggestedCrops, setSuggestedCropsCrops] = useState<string[]>([]);
     const [machinery, setMachinery] = useState<string[]>([]);
-    const [cropMachineryMap, setCropMachineryMap] = useState<Record<string, string[]>>({});
+    const [machineryByCropId, setMachineryByCropId] = useState<Record<string, string[]>>({});
 
     // const [selectedSuggestedCrops, setSelectedSuggestedCrops] = useState<string[]>([]);
     const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
@@ -151,6 +151,7 @@ const RotationPlan = () => {
             .map(crop => crop.id);
 
         const fetchMachinery = async () => {
+            const updatedMap: Record<string, string[]> = { ...machineryByCropId };
             for (const id of selectedCropIds) {
                 try {
                     const response = await fetch(`http://localhost:8000/api/crop-machinery?id=${id}`, {
@@ -161,16 +162,32 @@ const RotationPlan = () => {
                     });
 
                     const data = await response.json();
+                    updatedMap[id] = data;
                     setMachinery(prev => [...new Set([...prev, ...data])]);
                 } catch (error) {
                     console.error("Failed to fetch machinery for crop", id, error);
                 }
             }
+            setMachineryByCropId(updatedMap);
         };
         if (selectedCropIds.length > 0) {
             fetchMachinery();
         }
     }, [selectedCrops, crops])
+
+    // Delete machinery when crops are unselected
+    useEffect(() => {
+        const selectedIds = crops
+            .filter(crop => selectedCrops.includes(crop.name))
+            .map(crop => crop.id);
+
+        const allMachines = selectedIds
+            .flatMap(id => machineryByCropId[id] || []);
+   
+        const unique = Array.from(new Set(allMachines));
+
+        setMachinery(unique);
+    }, [selectedCrops, machineryByCropId, crops]);
 
     // Handle polygon creation on the map
     const handlePolygonCreate = async (coords) => {
