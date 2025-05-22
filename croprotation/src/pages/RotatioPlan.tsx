@@ -6,7 +6,7 @@ import style from "../styling/rotationPlan.module.css"
 import cropRotationImage from "../assets/crop_rotation.png"
 import PolygonMap from "../components/PolygonMap";
 import CropInputPair from "../components/CropInputPair";
-import { a, map } from "framer-motion/client";
+import { a, map, pre } from "framer-motion/client";
 
 type Crop = { id: string; name: string };
 
@@ -37,7 +37,7 @@ const RotationPlan = () => {
     const [machinery, setMachinery] = useState<string[]>([]);
     const [machineryByCropId, setMachineryByCropId] = useState<Record<string, string[]>>({});
 
-    // const [selectedSuggestedCrops, setSelectedSuggestedCrops] = useState<string[]>([]);
+    const [selectedSuggestedCrops, setSelectedSuggestedCrops] = useState<string[]>([]);
     const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
     const [selectedMachinery, setSelectedMachinery] = useState<string[]>([]);
 
@@ -167,6 +167,8 @@ const RotationPlan = () => {
                 } catch (error) {
                     console.error("Failed to fetch machinery for crop", id, error);
                 }
+
+                if (selectedCropIds.includes("__all__")) return;
             }
             setMachineryByCropId(updatedMap);
         };
@@ -183,7 +185,7 @@ const RotationPlan = () => {
 
         const allMachines = selectedIds
             .flatMap(id => machineryByCropId[id] || []);
-   
+
         const unique = Array.from(new Set(allMachines));
 
         setMachinery(unique);
@@ -313,8 +315,8 @@ const RotationPlan = () => {
                         <div className={style.checkBox_container}>
                             <CheckBox
                                 items={suggestedCrops}
-                                selected={selectedCrops}
-                                setSelected={setSelectedCrops} />
+                                selected={selectedSuggestedCrops}
+                                setSelected={setSelectedSuggestedCrops} />
                         </div>
                     </div>
                 )}
