@@ -51,25 +51,25 @@ const RotationPlan = () => {
     const optionsFertilization = [
         { label: "Select fertilization", value: -1 },
         { label: "No fertilization", value: 0 },
-        { label: "Limited fertilization", value: 0.5 },
-        { label: "Fertilized", value: 0.75 },
-        { label: "Fully fertilized", value: 1 }
+        { label: "Limited fertilization", value: 1 },
+        { label: "Fertilized", value: 2 },
+        { label: "Fully fertilized", value: 3 }
     ]
 
     const optionsIrrigation = [
         { label: "Select irrigation", value: -1 },
         { label: "No irrigation", value: 0 },
-        { label: "Limited irrigation", value: 0.5 },
-        { label: "Irrigated", value: 0.75 },
-        { label: "Fully irrigated", value: 1 }
+        { label: "Limited irrigation", value: 1 },
+        { label: "Irrigated", value: 2 },
+        { label: "Fully irrigated", value: 3 }
     ]
 
     const optionsSpraying = [
         { label: "Select sraying", value: -1 },
         { label: "No sraying", value: 0 },
-        { label: "Limited sraying", value: 0.5 },
-        { label: "Srayted", value: 0.75 },
-        { label: "Fully srayted", value: 1 }
+        { label: "Limited sraying", value: 1 },
+        { label: "Srayted", value: 2 },
+        { label: "Fully srayted", value: 3 }
     ]
 
     // Add a new effective crop pair
