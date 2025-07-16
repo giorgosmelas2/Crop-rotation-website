@@ -307,7 +307,7 @@ const RotationPlan = () => {
             k: potassiumValue,
             ph: pHValue,
             machinery: selectedMachinery,
-            past_crops: [pastYearCrop3, pastYearCrop2, pastYearCrop1].filter(Boolean),
+            past_crops: [pastYearCrop2, pastYearCrop1].filter(Boolean),
             effective_pairs: effectivecropPairs.filter(
                 (pair) => pair.crop1 && pair.crop2
             ),
