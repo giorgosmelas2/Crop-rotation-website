@@ -23,14 +23,14 @@ const Home = () => {
                             variant="main_title"
                             color="green"
                             as="h2">
-                            Wellcome to AI-Powered Crop Rotation Advisor
+                            Καλώς ήρθες στον AI-Powered Σύμβουλο Αμειψισποράς!
                         </Text>
                         <div className={style.green_line}></div>
                         <Text
                             variant="calligraphic_title"
                             color="white"
                             as="h3">
-                            Let nature and AI grow your future
+                            Άφησε τη φύση και το AI να σχεδιάσουν τη σοδειά του αύριο.
                         </Text>
                     </div>
                 </motion.div>
@@ -42,12 +42,17 @@ const Home = () => {
                         variant="main_text"
                         color="black"
                         as="p">
-                        This AI-driven crop rotation recommendation system,
-                        designed to help farmers optimize their planting strategies
-                        for healthier soil, increased yields, and greater profitability.
-                        Our intelligent model analyzes soil nutrients, local climate conditions,
-                        and market demand to suggest the ideal crop sequence,
-                        ensuring sustainable farming practices and maximizing efficiency.
+                        Αυτό το σύστημα προτάσεων εναλλαγής καλλιεργειών, 
+                        βασισμένο στην τεχνητή νοημοσύνη, έχει σχεδιαστεί για να βοηθά τους αγρότες
+                        να στήνουν στρατηγικά το πλάνο αμειψισποράς τους. Ο στόχος; 
+                        Πιο υγιές έδαφος, καλύτερες αποδόσεις και φυσικά, 
+                        μεγαλύτερα κέρδη.
+
+                        Το έξυπνο μοντέλο μας αναλύει τα θρεπτικά στοιχεία του εδάφους, 
+                        τις τοπικές κλιματικές συνθήκες και τις τιμές της αγοράς, 
+                        για να σου προτείνει την ιδανική ακολουθία καλλιεργειών. 
+                        Έτσι, η γεωργία γίνεται πιο αποδοτική, πιο βιώσιμη και... 
+                        λίγο πιο έξυπνη από το συνηθισμένο.
                     </Text>
                     </div>
                     
@@ -57,7 +62,7 @@ const Home = () => {
                                 variant="box_title"
                                 color="white"
                                 as="h4">
-                                Soil
+                                Έδαφος
                             </Text>
                             <img src={soilImage}
                                 className={style.box_image}
@@ -66,7 +71,8 @@ const Home = () => {
                                 variant="box_text"
                                 color="white"
                                 as="p">
-                                Preserve soil health with scientifically optimized crop rotations.
+                                Κράτα το έδαφος σου ζωντανό και δυνατό — 
+                                με εναλλαγές καλλιεργειών που ξέρουν τι κάνουν!
                             </Text>
                         </div>
                         <div className={style.green_box}>
@@ -74,7 +80,7 @@ const Home = () => {
                                 variant="box_title"
                                 color="white"
                                 as="h4">
-                                Climate
+                                Κλίμα
                             </Text>
                             <img
                                 src={climateImage}
@@ -84,8 +90,8 @@ const Home = () => {
                                 variant="box_text"
                                 color="white"
                                 as="p">
-                                Adapt to changing climate conditions for better resilience.
-                                Align your crops with market demand to boost profitability.
+                                Ο καιρός αλλάζει — εσύ προσαρμόζεσαι έξυπνα. 
+                                Καλλιέργησε ότι ζητάει η αγορά και δες το ταμείο να χαμογελά!
                             </Text>
                         </div>
                     </div>

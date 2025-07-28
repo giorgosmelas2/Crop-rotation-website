@@ -12,7 +12,7 @@ const Overview = () => {
                     variant="main_title"
                     color="white"
                     as="h2">
-                    Rotations, Algorithms, and a Pinch of Nature
+                    Εναλλαγές, Αλγόριθμοι και λίγη Φύση… για το μυστικό μείγμα επιτυχίας!
                 </Text>
             </section>
             <section className={style.content_area}>
@@ -21,7 +21,7 @@ const Overview = () => {
                     <Text variant="calligraphic_title"
                         color="white"
                         as="h3">
-                            What is crop rotation?
+                            Τι είναι η αμειψισπορά;
                         </Text>
                     </div>
                     
@@ -29,18 +29,22 @@ const Overview = () => {
                         <Text variant="main_text"
                             color="white"
                             as="p">
-                            Crop rotation is a vital agricultural practice that plays a key role
-                            in maintaining soil fertility, reducing pests and diseases, and
-                            supporting sustainable crop production. However, designing optimal
-                            crop rotation strategies that balance ecological sustainability and
-                            economic viability remains a complex challenge.
+                            Η αμειψισπορά — η εναλλαγή διαφορετικών καλλιεργειών 
+                            στο ίδιο χωράφι με την πάροδο του χρόνου — είναι μια 
+                            από τις πιο σημαντικές και παλιές γεωργικές πρακτικές. 
+                            Διατηρεί τη γονιμότητα του εδάφους, περιορίζει την εξάπλωση 
+                            ασθενειών και παρασίτων και στηρίζει τη βιώσιμη παραγωγή. 
+                            Όμως, το να σχεδιάσει κανείς μια στρατηγική αμειψισποράς που να 
+                            είναι και οικολογικά ισορροπημένη και οικονομικά αποδοτική, δεν 
+                            είναι εύκολη υπόθεση.
 
-                            This project explores how Artificial Life techniques—such as
-                            evolutionary algorithms, agent-based modeling, and cellular
-                            automata—can be leveraged to optimize crop rotation strategies.
-                            By bridging the gap between computational intelligence and agricultural
-                            needs, this work highlights the potential of Artificial Life in
-                            enhancing sustainable farming.
+                            Εδώ έρχεται η Τεχνητή Ζωή να αναλάβει δράση. Μέσα από τεχνικές 
+                            όπως οι εξελικτικοί αλγόριθμοι, η μοντελοποίηση με πράκτορες 
+                            και τα κυψελοειδή αυτόματα, το έργο αυτό δείχνει πώς η υπολογιστική 
+                            εξυπνάδα μπορεί να γίνει το νέο εργαλείο του αγρότη. Συνδέοντας την 
+                            τεχνολογία με τις πραγματικές ανάγκες του χωραφιού, ανοίγουμε τον δρόμο 
+                            για μια γεωργία πιο έξυπνη, πιο βιώσιμη και — γιατί όχι — πιο 
+                            αποτελεσματική από ποτέ.
                         </Text>
                     </div>
                 </div>
@@ -49,12 +53,15 @@ const Overview = () => {
                         <Text variant="main_text"
                             color="black"
                             as="p">
-                            Through the development of a simulation framework,
-                            the project models key environmental and biological factors,
-                            including soil nutrient dynamics, crop growth cycles, weather
-                            conditions, and pest populations. Using agent-based models, the
-                            system simulates interactions between crops, soil, and pests, while
-                            cellular automata are used to represent spatial distribution and soil.
+                            Μέσα από την ανάπτυξη ενός πλαισίου προσομοίωσης, το έργο 
+                            μοντελοποιεί βασικούς περιβαλλοντικούς και βιολογικούς παράγοντες, 
+                            όπως η δυναμική των θρεπτικών συστατικών του Εδάφους, οι κύκλοι 
+                            ανάπτυξης των καλλιεργειών, οι καιρικές συνθήκες και οι πληθυσμοί 
+                            επιβλαβών οργανισμών. Χρησιμοποιώντας μοντέλα βασισμένα σε πράκτορες 
+                            (agent-based models), το σύστημα προσομοιώνει τις αλληλεπιδράσεις 
+                            μεταξύ καλλιεργειών, εδάφους και παρασίτων, ενώ τα κυψελοειδή αυτόματα 
+                            (cellular automata) χρησιμοποιούνται για να αναπαραστήσουν τη χωρική 
+                            κατανομή και τη δομή του εδάφους.
                         </Text>
                     </div>
                     <img src={arrowsImage} alt="recycle" className={style.icon} />
@@ -62,11 +69,12 @@ const Overview = () => {
                         <Text variant="main_text"
                             color="black"
                             as="p">
-                            By simulating different crop rotation scenarios under varying
-                            conditions, the system allows for the exploration of long-term
-                            impacts without the need for real-world field trials. This enables
-                            safer experimentation, supports adaptive planning, and accelerates
-                            the development of more resilient agricultural strategies.
+                            Με την προσομοίωση διαφορετικών σεναρίων αμειψισποράς υπό ποικίλες 
+                            συνθήκες, το σύστημα επιτρέπει τη διερεύνηση των μακροπρόθεσμων 
+                            επιπτώσεων χωρίς την ανάγκη δοκιμών σε πραγματικά αγροτεμάχια. 
+                            Αυτό καθιστά δυνατή την ασφαλέστερη πειραματική προσέγγιση, 
+                            υποστηρίζει τον ευέλικτο σχεδιασμό και επιταχύνει την ανάπτυξη πιο 
+                            νθεκτικών γεωργικών στρατηγικών.
                         </Text>
                     </div>
                 </div>
@@ -75,16 +83,18 @@ const Overview = () => {
                         <Text variant="main_text"
                             color="white"
                             as="p">
-                            Advanced optimization algorithms, including genetic algorithms and
-                            particle swarm optimization, are employed to evolve crop rotation
-                            sequences that maximize productivity, suppress pests, and maintain
-                            long-term soil health.
+                            Προηγμένοι αλγόριθμοι βελτιστοποίησης, όπως οι γενετικοί αλγόριθμοι 
+                            και η βελτιστοποίηση σμήνους σωματιδίων (particle swarm optimization), 
+                            χρησιμοποιούνται για να εξελίξουν ακολουθίες αμειψισποράς που 
+                            μεγιστοποιούν την παραγωγικότητα, καταστέλλουν τα παράσιτα και 
+                            διατηρούν τη μακροπρόθεσμη υγεία του Εδάφους.
 
-                            The result is a customizable and reusable decision-support tool that
-                            provides optimized rotation plans tailored to specific environmental
-                            conditions. This project offers valuable insights and practical
-                            recommendations for farmers, researchers, and policymakers aiming to
-                            promote sustainable agriculture through data-driven solutions.
+                            Το αποτέλεσμα είναι ένα προσαρμόσιμο και επαναχρησιμοποιήσιμο εργαλείο 
+                            υποστήριξης αποφάσεων, το οποίο παρέχει βελτιστοποιημένα πλάνα 
+                            αμειψισποράς προσαρμοσμένα σε συγκεκριμένες περιβαλλοντικές συνθήκες. 
+                            Το έργο αυτό προσφέρει πολύτιμες γνώσεις και πρακτικές προτάσεις για 
+                            αγρότες, ερευνητές και υπεύθυνους χάραξης πολιτικής που επιδιώκουν να 
+                            προωθήσουν τη βιώσιμη γεωργία μέσα από λύσεις βασισμένες σε δεδομένα.
 
                         </Text>
                     </div>

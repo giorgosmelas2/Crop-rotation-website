@@ -139,7 +139,7 @@ const Login = () => {
                 </form>
 
                 <button className={style.submit_btn} type="submit" onClick={handleSubmit}>
-                    Submit
+                    Υποβολή
                 </button>
 
                 {serverMessage && (

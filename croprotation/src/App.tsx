@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ToastManager from "./components/Toast";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -22,8 +23,8 @@ function App() {
         <Route path="/account" element={<Account />} />
       </Route>
     </Routes>
+    <ToastManager />
   </BrowserRouter>
-  
   );
 }
 

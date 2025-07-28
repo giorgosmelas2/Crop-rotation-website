@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import style from "../styling/header.module.css";
-import farmerImage from "../assets/farmer.png";
 import { Text } from "./Text";
 import { supabase } from "../lib/supabaseClient";
 
@@ -71,7 +70,7 @@ const Header = () => {
             variant="header_button_text"
             color="white"
             as="span">
-            Overview
+            Επισκόπηση
           </Text>
         </Link>
         <Link
@@ -81,7 +80,7 @@ const Header = () => {
             variant="header_button_text"
             color="white"
             as="span">
-            About me
+            Προφίλ
           </Text>
         </Link>
         <Link
@@ -91,7 +90,7 @@ const Header = () => {
             variant="header_button_text"
             color="white"
             as="span">
-            Rotation Plan
+            Πλάνο
           </Text>
         </Link>
         <Link to="login" className={style.menu_button}>

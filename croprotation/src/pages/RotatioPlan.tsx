@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Text } from "../components/Text";
 import { CheckBox } from "../components/CheckBox";
+import  LoadingIcon  from "../components/Loading";
+import { supabase } from "../lib/supabaseClient";
+import toast from 'react-hot-toast';
 import * as turf from "@turf/turf";
 import type { Feature, Polygon } from "geojson";
 import style from "../styling/rotationPlan.module.css";
 import cropRotationImage from "../assets/crop_rotation.png";
 import PolygonMap from "../components/PolygonMap";
 import CropInputPair from "../components/CropInputPair";
-import { s } from "framer-motion/client";
 
 type Crop = { id: string; name: string };
 
@@ -24,7 +26,6 @@ const RotationPlan = () => {
     const [potassiumValue, setPotassiumValue] = useState("");
     const [pHValue, setPHValue] = useState("");
 
-    const [pastYearCrop3, setPastYearCrop3] = useState("");
     const [pastYearCrop2, setPastYearCrop2] = useState("");
     const [pastYearCrop1, setPastYearCrop1] = useState("");
 
@@ -45,31 +46,34 @@ const RotationPlan = () => {
     const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
     const [selectedMachinery, setSelectedMachinery] = useState<string[]>([]);
 
+    const [loading, setLoading] = useState(false);
+
+
     // Options for fertilization, irrigation, and spraying. The user selects an option 
     // and that option is converted to a coefficient for the prediction model
 
     const optionsFertilization = [
-        { label: "Select fertilization", value: -1 },
-        { label: "No fertilization", value: 0 },
-        { label: "Limited fertilization", value: 1 },
-        { label: "Fertilized", value: 2 },
-        { label: "Fully fertilized", value: 3 }
+        { label: "Επιλογή", value: -1 },
+        { label: "Καθόλου", value: 0 },
+        { label: "Περιορισμένη", value: 1 },
+        { label: "Καλή", value: 2 },
+        { label: "Πλήρως", value: 3 }
     ]
 
     const optionsIrrigation = [
-        { label: "Select irrigation", value: -1 },
-        { label: "No irrigation", value: 0 },
-        { label: "Limited irrigation", value: 1 },
-        { label: "Irrigated", value: 2 },
-        { label: "Fully irrigated", value: 3 }
+        { label: "Επιλογή", value: -1 },
+        { label: "Καθόλου", value: 0 },
+        { label: "Περιορισμένη", value: 1 },
+        { label: "Καλή", value: 2 },
+        { label: "Πλήρως", value: 3 }
     ]
 
     const optionsSpraying = [
-        { label: "Select sraying", value: -1 },
-        { label: "No sraying", value: 0 },
-        { label: "Limited sraying", value: 1 },
-        { label: "Srayted", value: 2 },
-        { label: "Fully srayted", value: 3 }
+        { label: "Επιλογή", value: -1 },
+        { label: "Καθόλου", value: 0 },
+        { label: "Περιορισμένος", value: 1 },
+        { label: "Καλός", value: 2 },
+        { label: "Πλήρως", value: 3 }
     ]
 
     // Add a new effective crop pair
@@ -240,7 +244,7 @@ const RotationPlan = () => {
 
         const { lat, lng } = getCentroid(coords);
         console.log("Centroid coordinates:", { lat, lng });
-        setCoordinates({ lat, lng})
+        setCoordinates({ lat, lng })
         console.log("coordinates:", coordinates);
 
         const geojson: Feature<Polygon> = {
@@ -291,47 +295,94 @@ const RotationPlan = () => {
     };
 
     const handleSubmit = async () => {
-        const cleanedCrops = [
-            ...new Set([...selectedSuggestedCrops, ...selectedCrops]),
-        ].filter((crop) => crop !== "All");
-        const payload = {
-            crops: cleanedCrops,
-            coordinates: coordinates,
-            area: area,
-            soil_type: texture,
-            irrigation: irrigation,
-            fertilization: fertilization,
-            spraying: spraying,
-            n: nitrogenValue,
-            p: phosphorusValue,
-            k: potassiumValue,
-            ph: pHValue,
-            machinery: selectedMachinery,
-            past_crops: [pastYearCrop2, pastYearCrop1].filter(Boolean),
-            effective_pairs: effectivecropPairs.filter(
-                (pair) => pair.crop1 && pair.crop2
-            ),
-            uneffective_pairs: uneffectiveCropPairs.filter(
-                (pair) => pair.crop1 && pair.crop2
-            ),
-            years: years,
-        };
+        const isLoggedIn = await checkUserLoggedIn();
+        if (!isLoggedIn) {
+            toast.error("Πρέπει να είσαι συνδεμένος στον λογαριασμό σου για να δεις το πλάνο αμειψισποράς σου");
+            return;
+        }
 
-        console.log("Payload to be sent:", payload);
+        setLoading(true);
 
         try {
-            const res = await fetch("http://localhost:8000/api/rotation-plan", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
-            });
+            const {
+                data: { user }
+            } = await supabase.auth.getUser();
 
-            const data = await res.json();
-            console.log("Response from backend:", data);
+            if (!user) {
+                toast.error("Δεν βρέθηκε χρήστης.");
+                setLoading(false);
+                return;
+            }
+
+            if (checkRotationValues()) {
+                const cleanedCrops = [...new Set([...selectedSuggestedCrops, ...selectedCrops])]
+                    .filter((crop) => crop !== "All");
+
+                const payload = {
+                    user_id: user.id,
+                    crops: cleanedCrops,
+                    coordinates,
+                    area,
+                    soil_type: texture,
+                    irrigation,
+                    fertilization,
+                    spraying,
+                    n: nitrogenValue,
+                    p: phosphorusValue,
+                    k: potassiumValue,
+                    ph: pHValue,
+                    machinery: selectedMachinery,
+                    past_crops: [pastYearCrop2, pastYearCrop1].filter(Boolean),
+                    effective_pairs: effectivecropPairs.filter(pair => pair.crop1 && pair.crop2),
+                    uneffective_pairs: uneffectiveCropPairs.filter(pair => pair.crop1 && pair.crop2),
+                    years,
+                };
+
+                const res = await fetch("http://localhost:8000/api/rotation-plan", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                const data = await res.json();
+                console.log("Response from backend:", data);
+                toast.success("Το πλάνο σου ειναι ετοιμο στον λογαριασμό σου!");
+            } else {
+                toast.error("Κάποια από τις τιμές που έδωσες δεν είναι έγκυρη!");
+            }
         } catch (err) {
             console.error("Submission failed:", err);
+            toast.error("Κάτι πήγε στραβά.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const checkRotationValues = () => {
+        const n = parseFloat(nitrogenValue)
+        const p = parseFloat(phosphorusValue)
+        const k = parseFloat(potassiumValue)
+        const ph = parseFloat(pHValue)
+
+        if (0 <= n && 0 <= p && 0 <= k && 0 <= ph && ph <= 14 && area != 0) {
+            return true
+        }
+    }
+
+    const checkUserLoggedIn = async () => {
+        const {
+            data: { session },
+            error,
+        } = await supabase.auth.getSession();
+
+        if (session && session.user) {
+            console.log('User is logged in:', session.user);
+            return true;
+        } else {
+            console.log('User is NOT logged in');
+            return false;
         }
     };
 
@@ -342,8 +393,8 @@ const RotationPlan = () => {
                 <div className={style.container}>
                     <div className={style.box}>
                         <Text variant="secondary_title" color="white" as="h2">
-                            Tell us about your field, and we'll tell you what to grow next -
-                            smarter soil, happier harvest!
+                            Εσύ δίνεις τα στοιχεία, εμείς δίνουμε τη σοδειά — έξυπνα χωράφια,
+                            ικανοποιημένοι αγρότες!
                         </Text>
                     </div>
                     <div className={style.image_box}>
@@ -352,7 +403,7 @@ const RotationPlan = () => {
                 </div>
                 <div className={style.calligraphic}>
                     <Text variant="calligraphic_title" color="white" as="h3">
-                        Let's rotate it right!
+                        Πάμε για την πιο έξυπνη αμειψισπορά!
                     </Text>
                 </div>
             </section>
@@ -362,7 +413,7 @@ const RotationPlan = () => {
                 {/* Map drawing section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Map Your Field.
+                        Πες μας πού σπέρνεις, να σου πούμε τι να κάνεις.
                     </Text>
                     <div className={style.map}>
                         <PolygonMap
@@ -375,7 +426,7 @@ const RotationPlan = () => {
                 {suggestedCrops.length > 0 && (
                     <div className={style.field_info_box}>
                         <Text variant="secondary_title" color="black" as="h2">
-                            Smart Crop Picks
+                            Οι καλλιέργειες που ταιριάζουν στο χωράφι σου
                         </Text>
 
                         <div className={style.checkBox_container}>
@@ -391,7 +442,7 @@ const RotationPlan = () => {
                 {/* All crops */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Pick Your Own
+                        Διάλεξε τις καλλιέργειες που θες
                     </Text>
 
                     <div className={style.checkBox_container}>
@@ -407,7 +458,7 @@ const RotationPlan = () => {
                 {machinery.length > 0 && (
                     <div className={style.field_info_box}>
                         <Text variant="secondary_title" color="black" as="h2">
-                            Required Machinery
+                            Πες μας τι σου λείπει και θα το λάβουμε υπόψη.
                         </Text>
                         <div className={style.checkBox_container}>
                             <CheckBox
@@ -422,7 +473,7 @@ const RotationPlan = () => {
                 {/* Rotation plan duration section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        How many years do you want to be your rotation plan?
+                        Για πόσα χρόνια θέλεις να είναι το πλάνο αμειψισποράς σου;
                     </Text>
                     <input
                         type="range"
@@ -433,26 +484,27 @@ const RotationPlan = () => {
                         className={style.spinner}
                     />
                     <Text variant="main_text" color="black" as="p">
-                        {years} years
+                        {years} χρόνια
                     </Text>
                 </div>
 
                 {/*Soil info */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Enter your soil information
+                        Πες μας λίγα πράγματα για το έδαφός σου
                     </Text>
                     <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Texture
+                                Υφή
                             </Text>
+
                             <select
                                 value={texture}
                                 onChange={(e) => setTexture(e.target.value)}
                                 className={style.select_input}
                             >
-                                <option>Select texture</option>
+                                <option> Επιλογή</option>
                                 {soilCategories.map((category, index) => (
                                     <option key={index} value={category}>
                                         {category}
@@ -462,7 +514,7 @@ const RotationPlan = () => {
                         </div>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Irrigation
+                                Άρδευση
                             </Text>
                             <select
                                 value={irrigation}
@@ -480,7 +532,7 @@ const RotationPlan = () => {
                     <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Fertilization
+                                Λίπανση
                             </Text>
                             <select
                                 value={fertilization}
@@ -496,7 +548,7 @@ const RotationPlan = () => {
                         </div>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Crop spraying
+                                Ψεκασμός
                             </Text>
                             <select
                                 value={spraying}
@@ -514,7 +566,7 @@ const RotationPlan = () => {
                     <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Nitrogen
+                                Άζωτο
                             </Text>
                             <input
                                 value={nitrogenValue}
@@ -526,7 +578,7 @@ const RotationPlan = () => {
                         </div>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Potassium
+                                Κάλιο
                             </Text>
                             <input
                                 value={potassiumValue}
@@ -540,7 +592,7 @@ const RotationPlan = () => {
                     <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
                             <Text variant="label" color="black" as="label">
-                                Phosphorus
+                                Φώσφορος
                             </Text>
                             <input
                                 value={phosphorusValue}
@@ -568,28 +620,16 @@ const RotationPlan = () => {
                 {/* Past crops section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Add your last 3 years of crops to help with rotation planning
+                        Συμπλήρωσε τις προηγούμενες καλλιέργειες για πιο σωστό πλάνο αμειψισποράς
                     </Text>
-                    <select
-                        value={pastYearCrop3}
-                        onChange={(e) => setPastYearCrop3(e.target.value)}
-                        className={style.select_input}
-                        style={{ marginBottom: "1.5rem" }}
-                    >
-                        <option>3 years ago</option>
-                        {allCrops.map((crop, index) => (
-                            <option key={index} value={crop}>
-                                {crop}
-                            </option>
-                        ))}
-                    </select>
+
                     <select
                         value={pastYearCrop2}
                         onChange={(e) => setPastYearCrop2(e.target.value)}
                         className={style.select_input}
                         style={{ marginBottom: "1.5rem" }}
                     >
-                        <option>2 years ago</option>
+                        <option>Πρόπερσι</option>
                         {allCrops.map((crop, index) => (
                             <option key={index} value={crop}>
                                 {crop}
@@ -602,7 +642,7 @@ const RotationPlan = () => {
                         className={style.select_input}
                         style={{ marginBottom: "1.5rem" }}
                     >
-                        <option>Last year</option>
+                        <option>Πέρυσι</option>
                         {allCrops.map((crop, index) => (
                             <option key={index} value={crop}>
                                 {crop}
@@ -614,7 +654,7 @@ const RotationPlan = () => {
                 {/* Effective crop sequence section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Share your effective crop sequence
+                        Πες μας ποια ακολουθία καλλιεργειών σου δούλεψε καλά
                     </Text>
                     {effectivecropPairs.map((pair, index) => (
                         <CropInputPair
@@ -631,14 +671,14 @@ const RotationPlan = () => {
                         />
                     ))}
                     <button onClick={addEffectiveCropPair} className={style.add_button}>
-                        + Add Crops
+                        + Προσθήκη
                     </button>
                 </div>
 
                 {/* Uneffective crop sequence section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Share your uneffective crop sequence
+                        Τι δεν πήγε όπως ήθελες; Ποια ακολουθία καλλιεργειών δεν σου δούλεψε καλά
                     </Text>
                     {uneffectiveCropPairs.map((pair, index) => (
                         <CropInputPair
@@ -655,12 +695,15 @@ const RotationPlan = () => {
                         />
                     ))}
                     <button onClick={addUneffectiveCropPair} className={style.add_button}>
-                        + Add Crops
+                        + Προσθήκη
                     </button>
                 </div>
                 <button className={style.submit_button} onClick={handleSubmit}>
-                    Submit
+                    Υποβολή
                 </button>
+
+                {loading && <LoadingIcon />}
+                
             </section>
         </>
     );

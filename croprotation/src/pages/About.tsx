@@ -14,7 +14,7 @@ const About = () => {
                 <Text
                     variant="main_title"
                     color="white"
-                    as="h2">Who am I?</Text>
+                    as="h2">Μυαλό για data, καρδιά για το Έδαφος.</Text>
             </section>
             <section className={style.green_personal_info_background}>
                 <div className={style.short_info_container}>
@@ -27,7 +27,7 @@ const About = () => {
                             variant="box_text"
                             color="white"
                             as="p">
-                            George-Serafeim Melas
+                            Γιώργος-Σεραφείμ Μελάς
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
@@ -39,7 +39,7 @@ const About = () => {
                             variant="box_text"
                             color="white"
                             as="p">
-                            Computer Engineering and Electronic Systems (IHU)
+                            Μηχανίκων Πληροφορικής και Ηλεκτρονίκων Συστημάτων (ΔΙΠΑΕ)
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
@@ -51,7 +51,7 @@ const About = () => {
                             variant="box_text"
                             color="white"
                             as="p">
-                            Focus on Artificial Intelligence
+                            Εστίαση στην Τεχνητή Νοημοσύνη
                         </Text>
                     </div>
                     <div className={style.short_info_box}>
@@ -63,7 +63,7 @@ const About = () => {
                             variant="box_text"
                             color="white"
                             as="p">
-                            From a farming family
+                            Απο μια αγροτική οικογένεια
                         </Text>
                     </div>
                 </div>
@@ -74,7 +74,7 @@ const About = () => {
                         variant="secondary_title"
                         color="black"
                         as="h2">
-                        A Few Words About Me
+                        Λίγα λόγια για εμένα 
                         <AnimatedDots />
                     </Text>
                     <div className={style.extended_info_box}>
@@ -82,28 +82,35 @@ const About = () => {
                             variant="main_text"
                             color="black"
                             as="p">
-                            My name is George-Serafeim Melas and I am a fifth-year student at the International Hellenic University (IHU),
-                            in the Department of Information and Electronic Systems Engineering.
+                            Είμαι ο Γιώργος-Σεραφείμ Μελάς και βρίσκομαι στο πέμπτο έτος των σπουδών 
+                            μου στο Διεθνές Πανεπιστήμιο της Ελλάδος (ΔΙΠΑΕ), στο Τμήμα Μηχανικών 
+                            Πληροφορικής και Ηλεκτρονικών Συστημάτων.
                         </Text>
                         <Text
                             variant="main_text"
                             color="black"
                             as="p">
-                            My passion for technology and computer science began at an early age
-                            and has grown steadily over the years.
-                            Over time, I developed a strong interest in Artificial Intelligence and
-                            its potential to solve real-world problems. Coming from a farming family myself,
-                            I find it especially meaningful to explore how AI can support farmers in improving
-                            their production and making smarter, more sustainable decisions.
+                            Η σχέση μου με την τεχνολογία ξεκίνησε νωρίς — πολύ νωρίς. Από τότε που 
+                            θυμάμαι τον εαυτό μου, ήθελα να καταλαβαίνω πώς δουλεύουν τα πράγματα 
+                            πίσω από την οθόνη. Με τα χρόνια, το ενδιαφέρον μου μεγάλωσε και κατέληξε… 
+                            σε πάθος για την Τεχνητή Νοημοσύνη.
+
+                            Αυτό που με κέρδισε στο AI είναι η δυνατότητά του να δίνει λύσεις σε 
+                            αληθινά προβλήματα — και όχι μόνο θεωρητικά. Καθώς προέρχομαι από 
+                            αγροτική οικογένεια, ήθελα να δω πώς μπορεί η τεχνολογία να "μιλήσει" 
+                            με τη γη. Πώς μπορεί να σταθεί δίπλα στον αγρότη, να τον βοηθήσει να 
+                            παράγει καλύτερα, εξυπνότερα και με περισσότερη φροντίδα για το περιβάλλον.
                         </Text>
                         <Text
                             variant="main_text"
                             color="black"
                             as="p">
-                            This project represents my desire to combine cutting-edge technology with practical
-                            agricultural needs—creating intelligent systems that promote efficiency, sustainability,
-                            and resilience in farming. Through this work, I aim to contribute to the development of smart,
-                            impactful solutions that make a real difference both for people and the planet.
+                            Έτσι γεννήθηκε αυτό το project: μια προσπάθεια να συνδυάσω την τεχνολογία 
+                            αιχμής με τις ανάγκες του χωραφιού. Έξυπνα συστήματα, φτιαγμένα για να 
+                            είναι πρακτικά, αποδοτικά και ανθεκτικά απέναντι στις σύγχρονες 
+                            προκλήσεις της γεωργίας.
+                            Ο στόχος μου; Να δημιουργήσω λύσεις που να μην μένουν στα χαρτιά. 
+                            Να προσφέρουν πραγματική αξία — και στον άνθρωπο και στον πλανήτη.
                         </Text>
                     </div>
                 </div>

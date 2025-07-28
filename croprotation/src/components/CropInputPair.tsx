@@ -7,15 +7,15 @@ import { Text } from "./Text";
 const CropInputPair = ({ index, value1, value2, value, crops, onChange, onValueChange, onDelete, whichPair }) => {
     
     const effectiveLabels = {
-        1: "Good",
-        2: "Very good",
-        3: "Excellent",
+        1: "Καλή",
+        2: "Πολύ καλή",
+        3: "Άριστη",
     }
 
     const uneffectiveLabels = {
-        1: "Bad",
-        2: "Very bad",
-        3: "Miserable",
+        1: "Κακή",
+        2: "Πολύ κακή",
+        3: "Άθλια",
     }
 
     return (
@@ -25,7 +25,7 @@ const CropInputPair = ({ index, value1, value2, value, crops, onChange, onValueC
                     value={value1}
                     onChange={(e) => onChange(index, 0, e.target.value)}
                     className={style.crop_input}>
-                    <option value="">Select Crop</option>
+                    <option value="">Επιλογή</option>
                     {crops.map((crop) => (
                         <option key={crop} value={crop}>
                             {crop}
@@ -39,7 +39,7 @@ const CropInputPair = ({ index, value1, value2, value, crops, onChange, onValueC
                     value={value2}
                     onChange={(e) => onChange(index, 1, e.target.value)}
                     className={style.crop_input}>
-                    <option value="">Select Crop</option>
+                    <option value="">Επιλογή</option>
                     {crops.map((crop) => (
                         <option key={crop} value={crop}>
                             {crop}
