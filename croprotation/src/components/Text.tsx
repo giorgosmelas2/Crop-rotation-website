@@ -1,5 +1,6 @@
 import React, { Children } from "react";
 
+// Text component for rendering styled text elements
 type Props = {
     variant?:   
         'header_title' |
@@ -22,18 +23,19 @@ type Props = {
 };
 
 const fontFamilies = {
-    header_title: "'Playfair Display', serif",
-    header_button_text: "'Playfair Display', serif",
-    button_text: "Georgia, 'Times New Roman', Times, serif",
-    main_title: "'Playfair Display', serif",
-    calligraphic_title: "'Gloria Hallelujah', cursive",
-    secondary_title: "Georgia, 'Times New Roman', Times, serif",
-    main_text: "Georgia, 'Times New Roman', Times, serif",
-    box_title: "Georgia, 'Times New Roman', Times, serif",
-    box_text: "Georgia, 'Times New Roman', Times, serif",
-    small_text: "Georgia, 'Times New Roman', Times, serif",
-    label: "Georgia, 'Times New Roman', Times, serif",
+    header_title: "'GFS Didot', 'Noto Serif Display', 'Noto Serif', serif",
+    header_button_text: "'GFS Didot', 'Noto Serif', serif",
+    button_text: "'Roboto', 'GFS Neohellenic', 'Noto Sans', system-ui, -apple-system, Arial, sans-serif",
+    main_title: "'Noto Serif Display', 'GFS Didot', 'Noto Serif', serif",
+    calligraphic_title: "'GFS Didot', 'Noto Serif Display', 'Noto Serif', serif", 
+    secondary_title: "'Noto Serif', 'GFS Didot', serif",
+    main_text: "'Noto Serif', 'GFS Neohellenic', serif",
+    box_title: "'Noto Serif', 'GFS Didot', serif",
+    box_text: "'Roboto', 'GFS Neohellenic', 'Noto Sans', sans-serif",
+    small_text: "'Roboto', 'GFS Neohellenic', 'Noto Sans', sans-serif",
+    label: "'Roboto', 'GFS Neohellenic', 'Noto Sans', sans-serif",
 };
+
 
 const colors = {
     white: '#ffffff',

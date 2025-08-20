@@ -1,6 +1,7 @@
 import React from "react";
 import style from "../styling/account.module.css";
 
+// CropPlanTable component to display a table of crop plans
 const CropPlanTable = ({ plans }) => {
   if (!plans?.length) {
     return <p>Δεν υπάρχουν πλάνα.</p>;

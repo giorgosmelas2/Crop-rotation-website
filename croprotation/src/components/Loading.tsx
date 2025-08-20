@@ -4,10 +4,13 @@ import flowerIcon from '../assets/sunflower.png';
 import leafIcon from '../assets/leaf.png';
 import wheatIcon from '../assets/wheat.png';
 
+// LoadingIcon component that displays a loading animation with icons
+// It cycles through different crop-related icons to indicate loading
 const LoadingIcon = () => {
   const icons = [flowerIcon, leafIcon, wheatIcon];
   const [index, setIndex] = useState(0);
 
+  // Cycle through the icons every 600ms
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % icons.length);

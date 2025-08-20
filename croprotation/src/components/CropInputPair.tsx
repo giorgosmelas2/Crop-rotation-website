@@ -4,8 +4,9 @@ import binImage from "../assets/bin.png";
 import arrowImage from "../assets/arrow.png";
 import { Text } from "./Text";
 
+// CropInputPair component for selecting pairs of crops and their effectiveness
 const CropInputPair = ({ index, value1, value2, value, crops, onChange, onValueChange, onDelete, whichPair }) => {
-    
+
     const effectiveLabels = {
         1: "Καλή",
         2: "Πολύ καλή",

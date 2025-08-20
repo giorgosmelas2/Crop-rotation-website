@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 
+// ToastManager component that provides a toast notification system
 const ToastManager = () => (
   <Toaster
     position="top-right"
