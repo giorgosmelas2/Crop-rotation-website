@@ -7,6 +7,8 @@ import style from "../styling/account.module.css";
 const Account = () => {
     const [username, setUsername] = useState("");
 
+    // Fetch the user's username when the component mounts
+    // This is used to display a personalized greeting on the account page
     useEffect(() => {
         const fetchUser = async () => {
             const { data: { user }, error } = await supabase.auth.getUser();
@@ -17,6 +19,7 @@ const Account = () => {
         fetchUser();
     }, []);
 
+    // Handle user logout
     const handleLogout = async () => {
         await supabase.auth.signOut();
         window.location.href = "/login"; // Redirect to login page after logout
@@ -24,6 +27,7 @@ const Account = () => {
 
     const [userPlans, setUserPlans] = useState([]);
 
+    // Fetch the user's crop plans when the component mounts
     useEffect(() => {
         const fetchPlans = async () => {
             const { data: { user } } = await supabase.auth.getUser();
