@@ -177,7 +177,7 @@ const RotationPlan = () => {
                     id,
                     name: String(name),
                 }));
-                cropArray.unshift({ id: "__all__", name: "All" });
+                cropArray.unshift({ id: "__all__", name: "Όλες" });
                 setCrops(cropArray);
                 setAllCrops(cropArray.map((crop) => crop.name));
             } catch (error) {
@@ -426,7 +426,7 @@ const RotationPlan = () => {
                 {suggestedCrops.length > 0 && (
                     <div className={style.field_info_box}>
                         <Text variant="secondary_title" color="black" as="h2">
-                            Οι καλλιέργειες που ταιριάζουν στο χωράφι σου
+                            Οι καλλιέργειες που ταιριάζουν στο χωράφι σου.
                         </Text>
 
                         <div className={style.checkBox_container}>
@@ -442,7 +442,7 @@ const RotationPlan = () => {
                 {/* All crops */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Διάλεξε τις καλλιέργειες που θες
+                        Διάλεξε τις καλλιέργειες που θες.
                     </Text>
 
                     <div className={style.checkBox_container}>
@@ -478,7 +478,7 @@ const RotationPlan = () => {
                     <input
                         type="range"
                         min="3"
-                        max="15"
+                        max="10"
                         value={years}
                         onChange={handleYearsChange}
                         className={style.spinner}
@@ -491,7 +491,7 @@ const RotationPlan = () => {
                 {/*Soil info */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Πες μας λίγα πράγματα για το έδαφός σου
+                        Πες μας λίγα λόγια για το έδαφός σου.
                     </Text>
                     <div className={style.soil_info_container}>
                         <div className={style.soil_info_box}>
@@ -620,7 +620,7 @@ const RotationPlan = () => {
                 {/* Past crops section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Συμπλήρωσε τις προηγούμενες καλλιέργειες για πιο σωστό πλάνο αμειψισποράς
+                        Συμπλήρωσε τις προηγούμενες του αγρού σου.
                     </Text>
 
                     <select
@@ -654,7 +654,7 @@ const RotationPlan = () => {
                 {/* Effective crop sequence section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Πες μας ποια ακολουθία καλλιεργειών σου δούλεψε καλά
+                        Πες μας ποιο ζευγάρι καλλιεργειών σου δούλεψε καλά.
                     </Text>
                     {effectivecropPairs.map((pair, index) => (
                         <CropInputPair
@@ -663,7 +663,7 @@ const RotationPlan = () => {
                             value1={pair.crop1}
                             value2={pair.crop2}
                             value={pair.value}
-                            crops={allCrops}
+                            crops={allCrops.filter(crop => crop !== "Όλες")}
                             whichPair={"effective"}
                             onChange={updateEffectiveCropPair}
                             onValueChange={updateEffectiveCropPairValue}
@@ -678,7 +678,7 @@ const RotationPlan = () => {
                 {/* Uneffective crop sequence section */}
                 <div className={style.field_info_box}>
                     <Text variant="secondary_title" color="black" as="h2">
-                        Τι δεν πήγε όπως ήθελες; Ποια ακολουθία καλλιεργειών δεν σου δούλεψε καλά
+                        Τι δεν πήγε όπως ήθελες; Ποιο ζευγάρι καλλιεργειών δεν σου δούλεψε καλά.
                     </Text>
                     {uneffectiveCropPairs.map((pair, index) => (
                         <CropInputPair
@@ -687,7 +687,7 @@ const RotationPlan = () => {
                             value1={pair.crop1}
                             value2={pair.crop2}
                             value={pair.value}
-                            crops={allCrops}
+                            crops={allCrops.filter(crop => crop !== "Όλες")}
                             whichPair={"uneffective"}
                             onChange={updateUneffectiveCropPair}
                             onValueChange={updateUneffectiveCropPairValue}
